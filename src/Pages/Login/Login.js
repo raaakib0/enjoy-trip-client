@@ -3,6 +3,8 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import img from '../../assets/images/login/login.svg';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 import SocialLogin from '../Shared/SocialLogin/SocialLogin';
+import toast from 'react-hot-toast';
+
 
 const Login = () => {
 
@@ -40,6 +42,8 @@ const Login = () => {
                     .then(res => res.json())
                     .then(data => {
                         console.log(data);
+                        toast('User Created Successfully.');
+                        alert('User Created Successfully.');
                         // local storage is the easiest but not the best place to store jwt token
                         localStorage.setItem('genius-token', data.token);
                         navigate(from, { replace: true });

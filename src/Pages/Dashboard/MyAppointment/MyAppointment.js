@@ -23,7 +23,7 @@ const MyAppointment = () => {
 
     return (
         <div>
-            <h3 className="text-3xl mb-5">My Appointments</h3>
+            <h3 className="text-3xl mb-5">My Vehicles</h3>
             <div className="overflow-x-auto">
                 <table className="table w-full">
                     <thead>
@@ -41,7 +41,7 @@ const MyAppointment = () => {
                             orders &&
                             orders?.map((order, i) => <tr key={orders._id}>
                                 <th>{i + 1}</th>
-                                <td>{order.services}</td>
+                                <td>{order.serviceName}</td>
                                 <td>{order.price}</td>
                                 <td>{order.appointmentDate}</td>
                                 <td>{order.slot}</td>

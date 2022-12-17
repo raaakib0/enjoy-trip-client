@@ -1,13 +1,16 @@
 import DashboardLayout from "../../Layout/DashboardLayout";
 import Main from "../../Layout/Main";
 import Checkout from "../../Pages/Checkout/Checkout";
+import AllUsers from "../../Pages/Dashboard/AllUsers/AllUsers";
 import Dashboard from "../../Pages/Dashboard/Dashboard/Dashboard";
 import MyAppointment from "../../Pages/Dashboard/MyAppointment/MyAppointment";
 import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Login/Login";
 import Orders from "../../Pages/Orders/Orders";
 import SignUp from "../../Pages/SignUp/SignUp";
+import AdminRoute from "../AdminRoute/AdminRoute";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import SellerRoute from "../SellerRoute/SellerRoute";
 
 // import Appointment from "../../Pages/Appointment/Appointment/Appointment";
 // import AddDoctor from "../../Pages/Dashboard/AddDoctor/AddDoctor";
@@ -53,17 +56,21 @@ const router = createBrowserRouter([
       },
       {
         path: '/dashboard',
-        element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
+        element: <SellerRoute> <DashboardLayout></DashboardLayout></SellerRoute>,
         // errorElement: <DisplayError></DisplayError>,
         children: [
           {
             path: '/dashboard',
             element: <MyAppointment></MyAppointment>
+          },
+          {
+            path: '/dashboard/allusers',
+            element: <AdminRoute><AllUsers></AllUsers></AdminRoute>
           }
           // {
           //   path: '/dashboard/allusers',
-          //   element: <AdminRoute><AllUsers></AllUsers></AdminRoute>
-          // },
+          //   element: <AllUsers></AllUsers>
+          // }
           // {
           //   path: '/dashboard/adddoctor',
           //   element: <AdminRoute><AddDoctor></AddDoctor></AdminRoute>

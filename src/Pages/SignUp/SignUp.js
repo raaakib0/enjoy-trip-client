@@ -1,25 +1,67 @@
 import React from 'react';
-import { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { useContext, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { Link, useNavigate } from 'react-router-dom';
 import { setAuthToken } from '../../api/auth';
+import toast from 'react-hot-toast';
 import img from '../../assets/images/login/login.svg';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
+// import useToken from '../../hooks/useToken';
 
 const SignUp = () => {
-    const {createUser} = useContext(AuthContext);
-    const handleSignUp = event =>{
+    // const { createUser } = useContext(AuthContext);
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { createUser, updateUser } = useContext(AuthContext);
+    const [signUpError, setSignUPError] = useState('');
+    const [createdUserEmail, setCreatedUserEmail] = useState('')
+    // const [token] = useToken(createdUserEmail);
+    const navigate = useNavigate();
+
+    const handleSignUp = event => {
         event.preventDefault();
         const form = event.target;
+        const name = form.name.value;
         const email = form.email.value;
         const password = form.password.value;
-        
+        console.log(name);
+
         createUser(email, password)
-        .then(result => {
-            const user = result.user;
-            console.log(user);
-            setAuthToken(user);
+            .then(result => {
+                const user = result.user;
+                console.log(user.email);
+
+                toast('User Created Successfully.')
+                setAuthToken(user);
+                // console.log(name);
+                const userInfo = {
+
+                    displayName: name
+                }
+                saveUser(name, email);
+                // updateUser(userInfo)
+                //     .then(() => {
+                //         console.log(name, email);
+                //         saveUser(name, email);
+                //     })
+            })
+            .catch(err => console.error(err));
+    }
+
+    const saveUser = (name, email) => {
+        const user = { name, email };
+        console.log(name, user);
+        fetch('http://localhost:5000/users', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
         })
-        .catch(err => console.error(err));
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                // setCreatedUserEmail(email);
+            })
     }
 
     return (
@@ -41,14 +83,14 @@ const SignUp = () => {
                             <label className="label">
                                 <span className="label-text">Email</span>
                             </label>
-                            <input type="text" name='email' placeholder="email" className="input input-bordered" required/>
+                            <input type="text" name='email' placeholder="email" className="input input-bordered" required />
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Password</span>
                             </label>
-                            <input type="password" name='password' placeholder="password" className="input input-bordered" required/>
-                            
+                            <input type="password" name='password' placeholder="password" className="input input-bordered" required />
+
                         </div>
                         <div className="form-control mt-6">
                             <input className="btn btn-primary" type="submit" value="Sign Up" />

@@ -2,15 +2,52 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../../assets/logo.svg';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
+import useAdmin from '../../../hooks/useAdmin';
+import { useQuery } from '@tanstack/react-query';
+import toast from 'react-hot-toast';
+import useSeller from '../../../hooks/useSeller';
 
 const Header = () => {
     const { user, logOut } = useContext(AuthContext);
+    const [isAdmin] = useAdmin(user?.email);
+    const [isSeller] = useSeller(user?.email);
+
+    const { data: users = [], refetch } = useQuery({
+        queryKey: ['users'],
+        queryFn: async () => {
+            const res = await fetch('http://localhost:5000/users');
+            const data = await res.json();
+            return data;
+        }
+    });
+    // const sellerUser = users.map(suser => suser = suser)
+    // console.log(suser)
+
+    const handleMakeSeller = id => {
+        fetch(`http://localhost:5000/users/seller/${id}`, {
+            method: 'PUT',
+            headers: {
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.modifiedCount > 0) {
+                    toast.success('Make Seller successful.')
+                    refetch();
+                }
+            })
+    }
 
     const handleLogOut = () => {
         logOut()
             .then()
             .catch();
     }
+    // const role2 = 'seller';
+    // const makeSeller = () => {
+
+    // }
 
     const menuItems = <>
         <li className='font-semibold'><Link to='/'>Home</Link></li>
@@ -19,14 +56,41 @@ const Header = () => {
                 <>
                     <li className='font-semibold'><Link to='/orders'>Orders</Link></li>
                     <li className='font-semibold'>
-                        <button onClick={ handleLogOut } className='btn-ghost'>Sign Out</button>
+                        <button onClick={handleLogOut} className='btn-ghost'>Sign Out</button>
                     </li>
-                    <li className='font-semibold'><Link to='/dashboard'>Dashboard</Link></li>
 
+                   
+                    {/* {
+                        users.map((user) => (console.log(user)))
+                    } */}
+                    {/* <li className='font-semibold'> */}
+                    {users.map((user) => <li key={user._id} >
+                        {/* <td>{user?.role2 !== 'seller' && <button onClick={() => handleMakeSeller(user._id)} className='btn btn-xs btn-primary'>Make Admin</button>}</td> */}
+                        {user?.role2 !== 'seller' &&
+                            <button onClick={() => handleMakeSeller(user._id)} className='btn-ghost'>{"Create Seller"}</button>
+                        }
+                    </li>
+                    )
+                    }
+                    {/* </li> */}
+
+                    {
+                        isSeller && <>
+                            
+                            <li className='font-semibold'><Link to='/dashboard'>Seller Dashboard</Link></li>
+                       </>
+                    }
+                    {
+                        isAdmin  &&
+                            
+                            <li className='font-semibold'><Link to='/dashboard'>Admin Dashboard</Link></li>
+                       
+                    }
                 </>
                 :
                 <li className='font-semibold'><Link to='/login'>Login</Link></li>
         }
+
     </>
 
     return (

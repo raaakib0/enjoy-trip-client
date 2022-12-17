@@ -16,7 +16,7 @@ const OrderRow = ({ order, handleDelete, handleStatusUpdate }) => {
         <tr>
             <th>
                 <label>
-                    <button onClick={() => handleDelete(_id)} className='btn btn-ghost'>X</button>
+                    <button onClick={() => handleDelete(_id)} className='btn btn-error'>X</button>
                 </label>
             </th>
             <td>
