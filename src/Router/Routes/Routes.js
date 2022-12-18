@@ -1,8 +1,10 @@
 import DashboardLayout from "../../Layout/DashboardLayout";
 import Main from "../../Layout/Main";
 import Checkout from "../../Pages/Checkout/Checkout";
+import AddVehicle from "../../Pages/Dashboard/AddVehicle/AddVehicle";
 import AllUsers from "../../Pages/Dashboard/AllUsers/AllUsers";
 import Dashboard from "../../Pages/Dashboard/Dashboard/Dashboard";
+import ManageVehicle from "../../Pages/Dashboard/ManageVehicle/ManageVehicle";
 import MyAppointment from "../../Pages/Dashboard/MyAppointment/MyAppointment";
 import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Login/Login";
@@ -66,19 +68,19 @@ const router = createBrowserRouter([
           {
             path: '/dashboard/allusers',
             element: <AdminRoute><AllUsers></AllUsers></AdminRoute>
-          }
+          },
           // {
           //   path: '/dashboard/allusers',
           //   element: <AllUsers></AllUsers>
           // }
-          // {
-          //   path: '/dashboard/adddoctor',
-          //   element: <AdminRoute><AddDoctor></AddDoctor></AdminRoute>
-          // },
-          // {
-          //   path: '/dashboard/managedoctors',
-          //   element: <AdminRoute><ManageDoctors></ManageDoctors></AdminRoute>
-          // },
+          {
+            path: '/dashboard/addvehicle',
+            element:  <SellerRoute> <AddVehicle></AddVehicle></SellerRoute>
+          },
+          {
+            path: '/dashboard/managevehicle',
+            element: <SellerRoute><ManageVehicle></ManageVehicle> </SellerRoute>
+          },
           // {
           //   path: '/dashboard/payment/:id',
           //   element: <Payment></Payment>,

@@ -64,28 +64,29 @@ const Header = () => {
                         users.map((user) => (console.log(user)))
                     } */}
                     {/* <li className='font-semibold'> */}
-                    {users.map((user) => <li key={user._id} >
-                        {/* <td>{user?.role2 !== 'seller' && <button onClick={() => handleMakeSeller(user._id)} className='btn btn-xs btn-primary'>Make Admin</button>}</td> */}
-                        {user?.role2 !== 'seller' &&
-                            <button onClick={() => handleMakeSeller(user._id)} className='btn-ghost'>{"Create Seller"}</button>
-                        }
-                    </li>
-                    )
-                    }
+                    {users.map((user) => <span className='font-semibold' key={user._id} >
+                            {/* <td>{user?.role2 !== 'seller' && <button onClick={() => handleMakeSeller(user._id)} className='btn btn-xs btn-primary'>Make Admin</button>}</td> */}
+                            {/* {user?.role2 !== 'seller' && */}
+                            {user?.role2 !== 'seller' &&
+                                <button onClick={() => handleMakeSeller(user._id)} className='btn-ghost'>{"Create Seller"}</button>
+                            }
+                        </span>
+                        )}
+                    
                     {/* </li> */}
-
                     {
                         isSeller && <>
-                            
+
                             <li className='font-semibold'><Link to='/dashboard'>Seller Dashboard</Link></li>
-                       </>
+                        </>
                     }
                     {
-                        isAdmin  &&
-                            
-                            <li className='font-semibold'><Link to='/dashboard'>Admin Dashboard</Link></li>
-                       
-                    }
+                        isAdmin &&
+
+                        <li className='font-semibold'><Link to='/dashboard'>Admin Dashboard</Link></li>
+
+                    }                
+                 
                 </>
                 :
                 <li className='font-semibold'><Link to='/login'>Login</Link></li>
@@ -114,7 +115,7 @@ const Header = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <button className="btn btn-outline btn-warning">Appointment</button>
+                <button className="btn btn-outline btn-warning">{user?.email }</button>
                 <label htmlFor="dashboard-drawer" tabIndex={2} className="btn btn-ghost lg:hidden">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                 </label>

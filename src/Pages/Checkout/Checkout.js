@@ -59,7 +59,7 @@ const Checkout = () => {
                 <h2 className="text-4xl">You are about to order: {title}</h2>
                 <h4 className="text-3xl">Price: {price}</h4>
                 <div className='grid grid-cols-1 lg:grid-cols-2 gap-4'>
-                    <input name="firstName" type="text" placeholder="First Name" className="input input-ghost w-full  input-bordered" />
+                    <input name="firstName" type="text" placeholder="First Name" defaultValue={user?.name} className="input input-ghost w-full  input-bordered" />
                     <input name="lastName" type="text" placeholder="Last Name" className="input input-ghost w-full  input-bordered" />
                     <input name="phone" type="text" placeholder="Your Phone" className="input input-ghost w-full  input-bordered" required />
                     <input name="email" type="text" placeholder="Your email" defaultValue={user?.email} className="input input-ghost w-full  input-bordered" readOnly />
