@@ -5,7 +5,7 @@ import AddVehicle from "../../Pages/Dashboard/AddVehicle/AddVehicle";
 import AllUsers from "../../Pages/Dashboard/AllUsers/AllUsers";
 import Dashboard from "../../Pages/Dashboard/Dashboard/Dashboard";
 import ManageVehicle from "../../Pages/Dashboard/ManageVehicle/ManageVehicle";
-import MyAppointment from "../../Pages/Dashboard/MyAppointment/MyAppointment";
+import MyVehicle from "../../Pages/Dashboard/MyVehicle/MyVehicle";
 import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Login/Login";
 import Orders from "../../Pages/Orders/Orders";
@@ -14,12 +14,12 @@ import AdminRoute from "../AdminRoute/AdminRoute";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import SellerRoute from "../SellerRoute/SellerRoute";
 
-// import Appointment from "../../Pages/Appointment/Appointment/Appointment";
+// import Vehicle from "../../Pages/Vehicle/Vehicle/Vehicle";
 // import AddDoctor from "../../Pages/Dashboard/AddDoctor/AddDoctor";
 // import AllUsers from "../../Pages/Dashboard/AllUsers/AllUsers";
 //import Dashboard from "../../Pages/Dashboard/Dashboard/Dashboard";
 // import ManageDoctors from "../../Pages/Dashboard/ManageDoctors/ManageDoctors";
-// import MyAppointment from "../../Pages/Dashboard/MyAppointment/MyAppointment";
+// import MyVehicle from "../../Pages/Dashboard/MyVehicle/MyVehicle";
 // import Payment from "../../Pages/Dashboard/Payment/Payment";
 // import Home from "../../Pages/Home/Home/Home";
 // import Login from "../../Pages/Login/Login";
@@ -50,7 +50,7 @@ const router = createBrowserRouter([
       {
         path: '/checkout/:id',
         element: <PrivateRoute><Checkout></Checkout></PrivateRoute>,
-        loader: ({ params }) => fetch(`http://localhost:5000/services/${params.id}`)
+        loader: ({ params }) => fetch(`http://localhost:5000/vehicles/${params.id}`)
       },
       {
         path: '/orders',
@@ -63,7 +63,7 @@ const router = createBrowserRouter([
         children: [
           {
             path: '/dashboard',
-            element: <MyAppointment></MyAppointment>
+            element: <MyVehicle></MyVehicle>
           },
           {
             path: '/dashboard/allusers',

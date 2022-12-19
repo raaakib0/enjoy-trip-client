@@ -3,7 +3,7 @@ import { useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 
 const Checkout = () => {
-    const { _id, title, price } = useLoaderData();
+    const { _id, name, price } = useLoaderData();
     const { user } = useContext(AuthContext);
 
     const handlePlaceOrder = event => {
@@ -15,8 +15,8 @@ const Checkout = () => {
         const message = form.message.value;
 
         const order = {
-            service: _id,
-            serviceName: title,
+            vehicle: _id,
+            vehicleName: name,
             price,
             customer: name,
             email,
@@ -56,7 +56,7 @@ const Checkout = () => {
     return (
         <div>
             <form onSubmit={handlePlaceOrder}>
-                <h2 className="text-4xl">You are about to order: {title}</h2>
+                <h2 className="text-4xl">You are about to order: {name}</h2>
                 <h4 className="text-3xl">Price: {price}</h4>
                 <div className='grid grid-cols-1 lg:grid-cols-2 gap-4'>
                     <input name="firstName" type="text" placeholder="First Name" defaultValue={user?.name} className="input input-ghost w-full  input-bordered" />

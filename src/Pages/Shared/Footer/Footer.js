@@ -6,10 +6,10 @@ const Footer = () => {
         <footer className="footer p-32 bg-black text-white">
             <div>
                 <img src={logo} alt="" />
-                <p>ACME Industries Ltd.<br/>Providing reliable tech since 1992</p>
+                <p>Copywrite@2022<br/>Md.Rakibul Islam</p>
             </div>
             <div>
-                <span className="footer-title">Services</span>
+                <span className="footer-title">Vehicles</span>
                 <a href="/"className="link link-hover">Branding</a>
                 <a href="/"className="link link-hover">Design</a>
                 <a href="/"className="link link-hover">Marketing</a>

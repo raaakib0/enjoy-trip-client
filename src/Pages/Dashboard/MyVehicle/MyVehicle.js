@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 
-const MyAppointment = () => {
+const MyVehicle = () => {
     const { user } = useContext(AuthContext);
 
     const url = `http://localhost:5000/orders?email=${user?.email}`;
@@ -41,7 +41,7 @@ const MyAppointment = () => {
                             orders &&
                             orders?.map((order, i) => <tr key={orders._id}>
                                 <th>{i + 1}</th>
-                                <td>{order.serviceName}</td>
+                                <td>{order.vehicleName}</td>
                                 <td>{order.price}</td>
                                 <td>{order.appointmentDate}</td>
                                 <td>{order.slot}</td>
@@ -68,4 +68,4 @@ const MyAppointment = () => {
     );
 };
 
-export default MyAppointment;
+export default MyVehicle;

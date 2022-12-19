@@ -5,18 +5,18 @@ import ConfirmationModal from '../../Shared/ConfirmationModal/ConfirmationModal'
 import Loading from '../../Shared/Loading/Loading';
 
 const ManageVehicle = () => {
-    const [deletingDoctor, setDeletingDoctor] = useState(null);
+    const [deletingVehicle, setDeletingVehicle] = useState(null);
 
     const closeModal = () => {
-        setDeletingDoctor(null);
+        setDeletingVehicle(null);
     }
 
 
-    const { data: doctors, isLoading, refetch } = useQuery({
-        queryKey: ['doctors'],
+    const { data: vehicles, isLoading, refetch } = useQuery({
+        queryKey: ['vehicles'],
         queryFn: async () => {
             try {
-                const res = await fetch('http://localhost:5000/services', {
+                const res = await fetch('http://localhost:5000/vehicles', {
                     headers: {
                         authorization: `bearer ${localStorage.getItem('accessToken')}`
                     }
@@ -31,8 +31,8 @@ const ManageVehicle = () => {
     });
 
     
-    const handleDeleteVehicle = doctor => {
-        fetch(`http://localhost:5000/services/${doctor._id}`, {
+    const handleDeleteVehicle = vehicle => {
+        fetch(`http://localhost:5000/vehicles/${vehicle._id}`, {
             method: 'DELETE', 
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -42,7 +42,7 @@ const ManageVehicle = () => {
         .then(data => {
             if(data.deletedCount > 0){
                 refetch();
-                toast.success(`Doctor ${doctor.name} deleted successfully`)
+                toast.success(`Vehicle ${vehicle.name} deleted successfully`)
             }
         })
     }
@@ -53,7 +53,7 @@ const ManageVehicle = () => {
 
     return (
         <div>
-            <h2 className="text-3xl">Manage Doctors: {doctors?.length}</h2>
+            <h2 className="text-3xl">Manage Vehicles: {vehicles?.length}</h2>
             <div className="overflow-x-auto">
                 <table className="table w-full">
                     <thead>
@@ -62,24 +62,24 @@ const ManageVehicle = () => {
                             <th>Avatar</th>
                             <th>Name</th>
                             <th>Email</th>
-                            <th>Specialty</th>
+                            <th>Categories</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         {
-                            doctors.map((doctor, i) => <tr key={doctor._id}>
+                            vehicles.map((vehicle, i) => <tr key={vehicle._id}>
                                 <th>{i + 1}</th>
                                 <td><div className="avatar">
                                     <div className="w-24 rounded-full">
-                                        <img src={doctor.image} alt="" />
+                                        <img src={vehicle.img} alt="" />
                                     </div>
                                 </div></td>
-                                <td>{doctor.name}</td>
-                                <td>{doctor.email}</td>
-                                <td>{doctor.specialty}</td>
+                                <td>{vehicle.name}</td>
+                                <td>{vehicle.email}</td>
+                                <td>{vehicle.categorie}</td>
                                 <td>
-                                    <label onClick={() => setDeletingDoctor(doctor)} htmlFor="confirmation-modal" className="btn btn-sm btn-error">Delete</label>
+                                    <label onClick={() => setDeletingVehicle(vehicle)} htmlFor="confirmation-modal" className="btn btn-sm btn-error">Delete</label>
                                 </td>
                             </tr>)
                         }
@@ -87,12 +87,12 @@ const ManageVehicle = () => {
                 </table>
             </div>
             {
-                deletingDoctor && <ConfirmationModal
+                deletingVehicle && <ConfirmationModal
                     title={`Are you sure you want to delete?`}
-                    message={`If you delete ${deletingDoctor.name}. It cannot be undone.`}
+                    message={`If you delete ${deletingVehicle.name}. It cannot be undone.`}
                     successAction = {handleDeleteVehicle}
                     successButtonName="Delete"
-                    modalData = {deletingDoctor}
+                    modalData={deletingVehicle}
                     closeModal = {closeModal}
                 >
                 </ConfirmationModal>

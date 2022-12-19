@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 
 const OrderRow = ({ order, handleDelete, handleStatusUpdate }) => {
-    const { _id, serviceName, phone, customer, price, service, status } = order;
-    const [orderService, setOrderService] = useState({})
+    const { _id, vehicleName, phone, customer, price, vehicle, status } = order;
+    const [orderVehicle, setOrderVehicle] = useState({})
 
     useEffect(() => {
-        fetch(`http://localhost:5000/services/${service}`)
+        fetch(`http://localhost:5000/vehicles/${vehicle}`)
             .then(res => res.json())
-            .then(data => setOrderService(data));
-    }, [service])
+            .then(data => setOrderVehicle(data));
+    }, [vehicle])
 
     
 
@@ -24,8 +24,8 @@ const OrderRow = ({ order, handleDelete, handleStatusUpdate }) => {
                     <div className="avatar">
                         <div className="rounded w-24 h-24">
                             {
-                                orderService?.img && 
-                                <img src={orderService.img} alt="Avatar Tailwind CSS Component" />}
+                                orderVehicle?.img && 
+                                <img src={orderVehicle.img} alt="Avatar Tailwind CSS Component" />}
                         </div>
                     </div>
                     <div>
@@ -35,7 +35,7 @@ const OrderRow = ({ order, handleDelete, handleStatusUpdate }) => {
                 </div>
             </td>
             <td>
-                {serviceName}
+                {vehicleName}
                 <br />
                 <span className="badge badge-ghost badge-sm">${price}</span>
             </td>

@@ -16,14 +16,17 @@ const SignUp = () => {
     const [createdUserEmail, setCreatedUserEmail] = useState('')
     // const [token] = useToken(createdUserEmail);
     const navigate = useNavigate();
-
+    // const sellerRequest = () => {
+    //     console.log()
+    // }
     const handleSignUp = event => {
         event.preventDefault();
         const form = event.target;
         const name = form.name.value;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(name);
+        const role2 = form.checkbox.value;
+        console.log(role2);
 
         createUser(email, password)
             .then(result => {
@@ -37,7 +40,7 @@ const SignUp = () => {
 
                     displayName: name
                 }
-                saveUser(name, email);
+                saveUser(name, email, role2);
                 // updateUser(userInfo)
                 //     .then(() => {
                 //         console.log(name, email);
@@ -47,9 +50,9 @@ const SignUp = () => {
             .catch(err => console.error(err));
     }
 
-    const saveUser = (name, email) => {
-        const user = { name, email };
-        console.log(name, user);
+    const saveUser = (name, email, role2) => {
+        const user = { name, email, role2 };
+        console.log( user);
         fetch('http://localhost:5000/users', {
             method: 'POST',
             headers: {
@@ -91,6 +94,12 @@ const SignUp = () => {
                             </label>
                             <input type="password" name='password' placeholder="password" className="input input-bordered" required />
 
+                        </div>
+                        <div className="form-control">
+                            <label className="cursor-pointer label">
+                                <span className="label-text">Request for Seller</span>
+                                <input type="checkbox" name="checkbox"  checked className="checkbox checkbox-info" />
+                            </label>
                         </div>
                         <div className="form-control mt-6">
                             <input className="btn btn-primary" type="submit" value="Sign Up" />

@@ -1,14 +1,18 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+// import logo from '../../../assets/logo.svg';
 import logo from '../../../assets/logo.svg';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 import useAdmin from '../../../hooks/useAdmin';
 import { useQuery } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 import useSeller from '../../../hooks/useSeller';
+import AllUsers from '../../Dashboard/AllUsers/AllUsers';
+import { useState } from 'react';
 
 const Header = () => {
     const { user, logOut } = useContext(AuthContext);
+    // console.log(user)
     const [isAdmin] = useAdmin(user?.email);
     const [isSeller] = useSeller(user?.email);
 
@@ -20,24 +24,26 @@ const Header = () => {
             return data;
         }
     });
-    // const sellerUser = users.map(suser => suser = suser)
-    // console.log(suser)
-
-    const handleMakeSeller = id => {
-        fetch(`http://localhost:5000/users/seller/${id}`, {
-            method: 'PUT',
-            headers: {
-                authorization: `bearer ${localStorage.getItem('accessToken')}`
-            }
-        })
-            .then(res => res.json())
-            .then(data => {
-                if (data.modifiedCount > 0) {
-                    toast.success('Make Seller successful.')
-                    refetch();
-                }
-            })
-    }
+    // const s= users.map(suser => console.log(suser._id));
+    // console.log(suser);
+   
+    // const handleMakeSeller = id => {
+    //     console.log(id)
+      
+    //     fetch(`http://localhost:5000/users/${id}`, {
+    //         method: 'PUT',
+    //         headers: {
+    //             authorization: `bearer ${localStorage.getItem('accessToken')}`
+    //         }
+    //     })
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             if (data.modifiedCount > 0) {
+    //                 toast.success('Make Seller successful.')
+    //                 refetch();
+    //             }
+    //         })
+    // }
 
     const handleLogOut = () => {
         logOut()
@@ -63,17 +69,20 @@ const Header = () => {
                     {/* {
                         users.map((user) => (console.log(user)))
                     } */}
-                    {/* <li className='font-semibold'> */}
-                    {users.map((user) => <span className='font-semibold' key={user._id} >
+                    <li className='font-semibold'>
+                    {/* {users.map((user) => <span className='font-semibold' key={user._id} > */}
                             {/* <td>{user?.role2 !== 'seller' && <button onClick={() => handleMakeSeller(user._id)} className='btn btn-xs btn-primary'>Make Admin</button>}</td> */}
                             {/* {user?.role2 !== 'seller' && */}
-                            {user?.role2 !== 'seller' &&
-                                <button onClick={() => handleMakeSeller(user._id)} className='btn-ghost'>{"Create Seller"}</button>
+                            {!isSeller &&
+                                // <button onClick={() => handleMakeSeller(user.email)} className='btn-ghost'>{"Create Seller"}</button>
+                            // users.map(suser =>    
+                            //     <button onClick={() => handleMakeSeller(suser._id)} className='btn-ghost'>Request for Seller</button>)
+                                <button className='btn-ghost'>Request for Seller</button>
                             }
-                        </span>
-                        )}
+                        {/* </span> */}
+                        {/* )} */}
                     
-                    {/* </li> */}
+                    </li>
                     {
                         isSeller && <>
 
@@ -104,10 +113,11 @@ const Header = () => {
                     <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                         {menuItems}
                     </ul>
-                </div>
-                <Link to="/" className="btn btn-ghost normal-case text-xl">
-                    <img src={logo} alt="" />
-                </Link>
+                </div >
+                {/* <Link to="/" className="btn btn-ghost normal-case text-xl"> */}
+                {/* <Link to="/" > */}
+                <img className="h-20 w-60" src={logo} alt="" />
+                {/* </Link> */}
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal p-0">

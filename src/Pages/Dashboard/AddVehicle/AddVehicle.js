@@ -36,21 +36,21 @@ const AddVehicle = () => {
         .then(imgData => {
             if(imgData.success){
                 console.log(imgData.data.url);
-                const service = {
-                    title: data.name, 
+                const vehicle = {
+                    name: data.name, 
                     email: data.email,
                     categorie: data.categorie,
                     img: imgData.data.url
                 }
 
                 // save doctor information to the database
-                fetch('http://localhost:5000/services', {
+                fetch('http://localhost:5000/vehicles', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json', 
                         authorization: `bearer ${localStorage.getItem('accessToken')}`
                     },
-                    body: JSON.stringify(service)
+                    body: JSON.stringify(vehicle)
                 })
                 .then(res => res.json())
                 .then(result =>{
