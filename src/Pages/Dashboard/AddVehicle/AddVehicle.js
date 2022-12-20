@@ -15,7 +15,7 @@ const AddVehicle = () => {
     const navigate = useNavigate();
     
     const { data: categories, isLoading } = useQuery({
-        queryKey: ['categorie'],
+        queryKey: ['categories'],
         queryFn: async () => {
             const res = await fetch('http://localhost:5000/categories');
             const data = await res.json();
@@ -40,6 +40,8 @@ const AddVehicle = () => {
                     name: data.name, 
                     email: data.email,
                     categorie: data.categorie,
+                    description: data.description,
+                    price: data.price,
                     img: imgData.data.url
                 }
 
@@ -85,6 +87,13 @@ const AddVehicle = () => {
                     {errors.email && <p className='text-red-500'>{errors.email.message}</p>}
                 </div>
                 <div className="form-control w-full max-w-xs">
+                    <label className="label"> <span className="label-text">Price</span></label>
+                    <input type="number" {...register("price", {
+                        required: "price is Required"
+                    })} className="input input-bordered w-full max-w-xs" />
+                    {errors.price && <p className='text-red-500'>{errors.price.message}</p>}
+                </div>
+                <div className="form-control w-full max-w-xs">
                     <label className="label"> <span className="label-text">Category</span></label>
                     <select 
                         {...register('categorie')}
@@ -95,9 +104,17 @@ const AddVehicle = () => {
                                 value={categorie.name}
                             >{categorie.name}</option>)
                         }
-                        
-                        
                     </select>
+                </div>
+                <div className="form-control">
+                    <label className="label">
+                        <span className="label-text">Description</span>
+                    </label>
+                    {/* <textarea className="textarea textarea-bordered h-24" placeholder="Description"></textarea> */}
+                    <textarea  type="text" {...register("description", {
+                        required: "description is Required"
+                    })} className="input input-bordered w-full max-w-xs h-24" />
+                    {errors.description && <p className='text-red-500'>{errors.description.message}</p>}
                 </div>
                 <div className="form-control w-full max-w-xs">
                     <label className="label"> <span className="label-text">Photo</span></label>
@@ -112,13 +129,6 @@ const AddVehicle = () => {
     );
 };
 
-
-/**
- * Three places to store images
- * 1. Third party image hosting server 
- * 2. File system of your server
- * 3. mongodb (database)
-*/
 
 export default AddVehicle;
 

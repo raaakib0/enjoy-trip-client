@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 
 const OrderRow = ({ order, handleDelete, handleStatusUpdate }) => {
-    const { _id, vehicleName, phone, customer, price, vehicle, status } = order;
+    const { _id, vehicleName, phone, customer, price, vehicle,img, status } = order;
     const [orderVehicle, setOrderVehicle] = useState({})
-
+console.log(img)
+    console.log(orderVehicle)
     useEffect(() => {
-        fetch(`http://localhost:5000/vehicles/${vehicle}`)
+        fetch(`http://localhost:5000/vehicles2/${vehicle}`)
             .then(res => res.json())
             .then(data => setOrderVehicle(data));
     }, [vehicle])

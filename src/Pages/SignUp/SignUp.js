@@ -25,7 +25,7 @@ const SignUp = () => {
         const name = form.name.value;
         const email = form.email.value;
         const password = form.password.value;
-        const role2 = form.checkbox.value;
+        const role2 = form.checkbox.checked;
         console.log(role2);
 
         createUser(email, password)
@@ -98,7 +98,7 @@ const SignUp = () => {
                         <div className="form-control">
                             <label className="cursor-pointer label">
                                 <span className="label-text">Request for Seller</span>
-                                <input type="checkbox" name="checkbox"  checked className="checkbox checkbox-info" />
+                                <input type="checkbox" name="checkbox" className="checkbox checkbox-info" />
                             </label>
                         </div>
                         <div className="form-control mt-6">

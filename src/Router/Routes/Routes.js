@@ -5,7 +5,7 @@ import AddVehicle from "../../Pages/Dashboard/AddVehicle/AddVehicle";
 import AllUsers from "../../Pages/Dashboard/AllUsers/AllUsers";
 import Dashboard from "../../Pages/Dashboard/Dashboard/Dashboard";
 import ManageVehicle from "../../Pages/Dashboard/ManageVehicle/ManageVehicle";
-import MyVehicle from "../../Pages/Dashboard/MyVehicle/MyVehicle";
+import MyOrder from "../../Pages/Dashboard/MyOrder/MyOrder";
 import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Login/Login";
 import Orders from "../../Pages/Orders/Orders";
@@ -19,7 +19,7 @@ import SellerRoute from "../SellerRoute/SellerRoute";
 // import AllUsers from "../../Pages/Dashboard/AllUsers/AllUsers";
 //import Dashboard from "../../Pages/Dashboard/Dashboard/Dashboard";
 // import ManageDoctors from "../../Pages/Dashboard/ManageDoctors/ManageDoctors";
-// import MyVehicle from "../../Pages/Dashboard/MyVehicle/MyVehicle";
+// import MyOrder from "../../Pages/Dashboard/MyOrder/MyOrder";
 // import Payment from "../../Pages/Dashboard/Payment/Payment";
 // import Home from "../../Pages/Home/Home/Home";
 // import Login from "../../Pages/Login/Login";
@@ -58,12 +58,13 @@ const router = createBrowserRouter([
       },
       {
         path: '/dashboard',
+        // element: <AdminRoute> <DashboardLayout></DashboardLayout></AdminRoute>,
         element: <SellerRoute> <DashboardLayout></DashboardLayout></SellerRoute>,
         // errorElement: <DisplayError></DisplayError>,
         children: [
           {
             path: '/dashboard',
-            element: <MyVehicle></MyVehicle>
+            element: <MyOrder></MyOrder>
           },
           {
             path: '/dashboard/allusers',

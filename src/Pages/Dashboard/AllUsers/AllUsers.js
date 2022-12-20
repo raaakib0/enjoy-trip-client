@@ -92,7 +92,7 @@ const AllUsers = () => {
                 <th>{i + 1}</th>
                 <td>{user.name}</td>
                 <td>{user.email}</td>
-                <td>{user?.role2 == 'on' && <button onClick={() => handleMakeSeller(user._id)} className='btn btn-xs btn-primary'>Make Seller</button>}</td>
+                <td>{user?.role2 == true && <button onClick={() => handleMakeSeller(user._id)} className='btn btn-xs btn-primary'>Make Seller</button>}</td>
                 <td>{user?.role !== 'admin' && <button onClick={() => handleMakeAdmin(user._id)} className='btn btn-xs btn-primary'>Make Admin</button>}</td>
                 {/* <td><button className='btn btn-xs btn-primary'>Make Admin</button></td> */}
                 {/* <td><button className='btn btn-xs btn-danger'>Delete</button></td> */}

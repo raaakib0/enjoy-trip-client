@@ -3,9 +3,10 @@ import { useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 
 const Checkout = () => {
-    const { _id, name, price } = useLoaderData();
+    const { _id, name, price,email,img } = useLoaderData();
     const { user } = useContext(AuthContext);
-
+    const sellerEmail = email;
+    // console.log(img)
     const handlePlaceOrder = event => {
         event.preventDefault();
         const form = event.target;
@@ -20,8 +21,10 @@ const Checkout = () => {
             price,
             customer: name,
             email,
+            sellerEmail: sellerEmail,
             phone,
-            message
+            message,
+            img:img
         }
 
         // if(phone.length > 10){

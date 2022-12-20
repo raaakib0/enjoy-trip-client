@@ -1,10 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+// import React, { useState } from 'react';
 import toast from 'react-hot-toast';
+import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 import ConfirmationModal from '../../Shared/ConfirmationModal/ConfirmationModal';
 import Loading from '../../Shared/Loading/Loading';
 
 const ManageVehicle = () => {
+    const { user, logOut } = useContext(AuthContext);
     const [deletingVehicle, setDeletingVehicle] = useState(null);
 
     const closeModal = () => {
@@ -12,11 +15,31 @@ const ManageVehicle = () => {
     }
 
 
+    // const [orders, setOrders] = useState([])
+
+    // useEffect(() => {
+    //     fetch(`http://localhost:5000/orders?email=${user?.email}`, {
+    //         headers: {
+    //             authorization: `Bearer ${localStorage.getItem('genius-token')}`
+    //         }
+    //     })
+    //         .then(res => {
+    //             if (res.status === 401 || res.status === 403) {
+    //                 return logOut();
+    //             }
+    //             return res.json();
+    //         })
+    //         .then(data => {
+    //             setOrders(data);
+    //         })
+    // }, [user?.email, logOut])
+
+
     const { data: vehicles, isLoading, refetch } = useQuery({
         queryKey: ['vehicles'],
         queryFn: async () => {
             try {
-                const res = await fetch('http://localhost:5000/vehicles', {
+                const res = await fetch(`http://localhost:5000/vehicles?email=${user?.email}`, {
                     headers: {
                         authorization: `bearer ${localStorage.getItem('accessToken')}`
                     }
@@ -61,7 +84,7 @@ const ManageVehicle = () => {
                             <th></th>
                             <th>Avatar</th>
                             <th>Name</th>
-                            <th>Email</th>
+                            <th>Price</th>
                             <th>Categories</th>
                             <th>Action</th>
                         </tr>
@@ -76,7 +99,7 @@ const ManageVehicle = () => {
                                     </div>
                                 </div></td>
                                 <td>{vehicle.name}</td>
-                                <td>{vehicle.email}</td>
+                                <td>{vehicle.price}</td>
                                 <td>{vehicle.categorie}</td>
                                 <td>
                                     <label onClick={() => setDeletingVehicle(vehicle)} htmlFor="confirmation-modal" className="btn btn-sm btn-error">Delete</label>

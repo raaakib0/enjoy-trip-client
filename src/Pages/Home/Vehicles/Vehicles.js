@@ -1,17 +1,20 @@
 import React from 'react';
 import { useRef } from 'react';
+import { useContext } from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 import VehicleCard from './VehicleCard';
 
 const Vehicles = () => {
+    const { user } = useContext(AuthContext);
     const [vehicles, setVehicles] = useState([]);
     const [isAsc, setIsAsc] = useState(true);
     const [search, setSearch] = useState('');
     const searchRef = useRef();
     useEffect(() => {
         // fetch(`http://localhost:5000/vehicles?search=${search}&order=${isAsc ? 'asc' : 'desc'}`)
-        fetch(`http://localhost:5000/vehicles`)
+        fetch(`http://localhost:5000/vehicles2`)
             .then(res => res.json())
             .then(data => setVehicles(data))
     }, [isAsc, search]);
