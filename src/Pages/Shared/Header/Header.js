@@ -73,25 +73,25 @@ const Header = () => {
                     {/* {users.map((user) => <span className='font-semibold' key={user._id} > */}
                             {/* <td>{user?.role2 !== 'seller' && <button onClick={() => handleMakeSeller(user._id)} className='btn btn-xs btn-primary'>Make Admin</button>}</td> */}
                             {/* {user?.role2 !== 'seller' && */}
-                            {!isSeller &&
+                            {/* {!isSeller &&
                                 // <button onClick={() => handleMakeSeller(user.email)} className='btn-ghost'>{"Create Seller"}</button>
                             // users.map(suser =>    
                             //     <button onClick={() => handleMakeSeller(suser._id)} className='btn-ghost'>Request for Seller</button>)
                                 <button className='btn-ghost'>Request for Seller</button>
-                            }
+                            } */}
                         {/* </span> */}
                         {/* )} */}
                     
                     </li>
                     {
-                        isSeller && <>
-
+                        isSeller && !isAdmin && <>
+                           
                             <li className='font-semibold'><Link to='/dashboard'>Seller Dashboard</Link></li>
                         </>
                     }
                     {
                         isAdmin &&
-
+                        
                         <li className='font-semibold'><Link to='/dashboard'>Admin Dashboard</Link></li>
 
                     }                
