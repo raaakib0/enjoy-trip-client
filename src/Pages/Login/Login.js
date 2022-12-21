@@ -24,7 +24,7 @@ const Login = () => {
             .then(result => {
                 const user = result.user;
 
-
+                navigate('/');
                 const currentUser = {
                     email: user.email
                 }

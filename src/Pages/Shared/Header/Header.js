@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 // import logo from '../../../assets/logo.svg';
 import logo from '../../../assets/logo.svg';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
@@ -11,6 +11,7 @@ import AllUsers from '../../Dashboard/AllUsers/AllUsers';
 import { useState } from 'react';
 
 const Header = () => {
+    const navigate = useNavigate();
     const { user, logOut } = useContext(AuthContext);
     // console.log(user)
     const [isAdmin] = useAdmin(user?.email);
@@ -49,6 +50,7 @@ const Header = () => {
         logOut()
             .then()
             .catch();
+        navigate('/')
     }
     // const role2 = 'seller';
     // const makeSeller = () => {

@@ -32,7 +32,7 @@ const SignUp = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user.email);
-
+                navigate('/')
                 toast('User Created Successfully.')
                 setAuthToken(user);
                 // console.log(name);
