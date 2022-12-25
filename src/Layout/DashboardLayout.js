@@ -28,6 +28,7 @@ const DashboardLayout = () => {
                             isAdmin && <>
                                 {/* <> */}
                                 <li><Link to="/dashboard/allusers">All Users</Link></li>
+                                <li><Link to="/dashboard/allvehicles">All Vehicles</Link></li>
                                 <li><Link to="/dashboard/allorders">All Order</Link></li>
                                 {!isSeller && <>
                                 <li><Link to="/dashboard/addvehicle">Add Vehicle</Link></li>

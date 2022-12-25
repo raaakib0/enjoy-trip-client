@@ -2,27 +2,55 @@ import React, { useContext } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 
+import { format } from 'date-fns';
+import { DayPicker } from 'react-day-picker';
+import { useState } from 'react';
+
+// export default function Example() {
+//     const [selected, setSelected] = React.useState < Date > ();
+
+//     let footer = <p>Please pick a day.</p>;
+//     if (selected) {
+//         footer = <p>You picked {format(selected, 'PP')}.</p>;
+//     }
+//     return (
+//         <DayPicker
+//             mode="single"
+//             selected={selected}
+//             onSelect={setSelected}
+//             footer={footer}
+//         />
+//     );
+// }
 const Checkout = () => {
+    
+    const [selectedDate, setSelectedDate] = useState(new Date());
     const { _id, name, price,email,img } = useLoaderData();
     const { user } = useContext(AuthContext);
     const sellerEmail = email;
-    // console.log(img)
+    // console.log(price)
     const handlePlaceOrder = event => {
         event.preventDefault();
         const form = event.target;
-        const name = `${form.firstName.value} ${form.lastName.value}`;
+        const startDate = form.startDate.value;
+        const days = form.days.value;
+        const customerName = form.customerName.value;
         const email = user?.email || 'unregistered';
         const phone = form.phone.value;
+        const address = form.address.value;
         const message = form.message.value;
 
         const order = {
             vehicle: _id,
             vehicleName: name,
             price,
-            customer: name,
+            startDate,
+            days,
+            customer: customerName,
             email,
             sellerEmail: sellerEmail,
             phone,
+            address,
             message,
             img:img
         }
@@ -53,7 +81,6 @@ const Checkout = () => {
             })
             .catch(er => console.error(er));
 
-
     }
 
     return (
@@ -61,15 +88,23 @@ const Checkout = () => {
             <form onSubmit={handlePlaceOrder}>
                 <h2 className="text-4xl">You are about to order: {name}</h2>
                 <h4 className="text-3xl">Price: {price}</h4>
-                <div className='grid grid-cols-1 lg:grid-cols-2 gap-4'>
-                    <input name="firstName" type="text" placeholder="First Name" defaultValue={user?.name} className="input input-ghost w-full  input-bordered" />
-                    <input name="lastName" type="text" placeholder="Last Name" className="input input-ghost w-full  input-bordered" />
+                <DayPicker
+                    mode="single"
+                    selected={selectedDate}
+                    onSelect={setSelectedDate}
+                />
+                <p>you have selected{format(selectedDate, 'PP')}</p>
+                <div className='grid grid-cols-1 lg:grid-cols-2 gap-4 mb-3'>
+                    <input name="startDate" type="text" placeholder="Start Date" defaultValue={format( selectedDate,'PP')} className="input input-ghost w-full  input-bordered" />
+                    <input name="days" type="number" placeholder="Days" className="input input-ghost w-full  input-bordered" />
+                    <input name="customerName" type="text" placeholder="Your Name"  className="input input-ghost w-full  input-bordered" />
                     <input name="phone" type="text" placeholder="Your Phone" className="input input-ghost w-full  input-bordered" required />
                     <input name="email" type="text" placeholder="Your email" defaultValue={user?.email} className="input input-ghost w-full  input-bordered" readOnly />
+                    <input name="address" type="text" placeholder="Your Address" className="input input-ghost w-full  input-bordered" />
                 </div>
                 <textarea name="message" className="textarea textarea-bordered h-24 w-full" placeholder="Your Message" required></textarea>
 
-                <input className='btn' type="submit" value="Place Your Order" />
+                <input className='btn mb-5' type="submit" value="Place Your Order" />
             </form>
         </div>
     );

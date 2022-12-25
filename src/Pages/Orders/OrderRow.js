@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const OrderRow = ({ order, handleDelete, handleStatusUpdate }) => {
-    const { _id, vehicleName, phone, customer, price, vehicle,img, status } = order;
+    const { _id, vehicleName, phone, customer, price, vehicle,img,days, status } = order;
     const [orderVehicle, setOrderVehicle] = useState({})
-console.log(img)
-    console.log(orderVehicle)
-    useEffect(() => {
-        fetch(`http://localhost:5000/vehicles2/${vehicle}`)
-            .then(res => res.json())
-            .then(data => setOrderVehicle(data));
-    }, [vehicle])
+// console.log(img)
+    // console.log(orderVehicle)
+    // useEffect(() => {
+    //     fetch(`http://localhost:5000/vehicles2/${vehicle}`)
+    //         .then(res => res.json())
+    //         .then(data => setOrderVehicle(data));
+    // }, [vehicle])
 
-    
+    // console.log(price*2)
 
     return (
+        <>
         <tr>
             <th>
                 <label>
@@ -25,8 +27,8 @@ console.log(img)
                     <div className="avatar">
                         <div className="rounded w-24 h-24">
                             {
-                                orderVehicle?.img && 
-                                <img src={orderVehicle.img} alt="Avatar Tailwind CSS Component" />}
+                                img && 
+                                <img src={img} alt="Avatar Tailwind CSS Component" />}
                         </div>
                     </div>
                     <div>
@@ -38,15 +40,21 @@ console.log(img)
             <td>
                 {vehicleName}
                 <br />
-                <span className="badge badge-ghost badge-sm">${price}</span>
+                <h2 className="badge badge-ghost font-bold">{ price} X { days} = {price * days}</h2>
             </td>
-            <td>Purple</td>
+            {/* <td>Purple</td> */}
+            <td></td>
             <th>
-                <button 
-                onClick={() => handleStatusUpdate(_id)}
-                className="btn btn-ghost btn-xs">{status ? status : 'pending'}</button>
+                <h2 
+                // onClick={() => handleStatusUpdate(_id)}
+                        className="">{status ? status : 'pending'}</h2>
+                   
             </th>
         </tr>
+         {/* <tr>total price</tr>
+            <th>total rate</th>
+            <td>total amount</td> */}
+        </>
     );
 };
 

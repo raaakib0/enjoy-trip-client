@@ -17,14 +17,14 @@ const Header = () => {
     const [isAdmin] = useAdmin(user?.email);
     const [isSeller] = useSeller(user?.email);
 
-    const { data: users = [], refetch } = useQuery({
-        queryKey: ['users'],
-        queryFn: async () => {
-            const res = await fetch('http://localhost:5000/users');
-            const data = await res.json();
-            return data;
-        }
-    });
+    // const { data: users = [], refetch } = useQuery({
+    //     queryKey: ['users'],
+    //     queryFn: async () => {
+    //         const res = await fetch('http://localhost:5000/users');
+    //         const data = await res.json();
+    //         return data;
+    //     }
+    // });
     // const s= users.map(suser => console.log(suser._id));
     // console.log(suser);
    
