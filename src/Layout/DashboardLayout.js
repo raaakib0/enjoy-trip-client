@@ -22,26 +22,26 @@ const DashboardLayout = () => {
                 </div>
                 <div className="drawer-side">
                     <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
-                    <ul className="menu p-4 w-80 text-base-content">
-                        
+                    <ul className="menu p-4 w-80 text-base-content bg-base-100">
+
                         {
                             isAdmin && <>
                                 {/* <> */}
-                                <li><Link to="/dashboard/allusers">All Users</Link></li>
-                                <li><Link to="/dashboard/allvehicles">All Vehicles</Link></li>
-                                <li><Link to="/dashboard/allorders">All Order</Link></li>
+                                <li className='font-semibold' ><Link to="/dashboard/allusers">All Users</Link></li>
+                                <li className='font-semibold' ><Link to="/dashboard/allvehicles">All Vehicles</Link></li>
+                                <li className='font-semibold' ><Link to="/dashboard/allorders">All Order</Link></li>
                                 {!isSeller && <>
-                                <li><Link to="/dashboard/addvehicle">Add Vehicle</Link></li>
-                                <li><Link to="/dashboard/managevehicle">Manage Vehicles</Link></li>
-                                    <li><Link to="/dashboard">My Orders</Link></li>
+                                    <li className='font-semibold' ><Link to="/dashboard/addvehicle">Add Vehicle</Link></li>
+                                    <li className='font-semibold' ><Link to="/dashboard/managevehicle">Manage Vehicles</Link></li>
+                                    <li className='font-semibold' ><Link to="/dashboard">My Orders</Link></li>
                                 </>}
                             </>
-                            
+
                         }
-                        {isSeller &&<>
-                            <li><Link to="/dashboard/addvehicle">Add Vehicle</Link></li>
-                            <li><Link to="/dashboard/managevehicle">Manage Vehicles</Link></li>
-                            <li><Link to="/dashboard">My Orders</Link></li>
+                        {isSeller && <>
+                            <li className='font-semibold' ><Link to="/dashboard/addvehicle">Add Vehicle</Link></li>
+                            <li className='font-semibold' ><Link to="/dashboard/managevehicle">Manage Vehicles</Link></li>
+                            <li className='font-semibold' ><Link to="/dashboard">My Orders</Link></li>
                         </>}
 
                     </ul>

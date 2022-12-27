@@ -46,6 +46,26 @@ const AllOrder = () => {
             })
     }
 
+    const handleDelete = id => {
+        const proceed = window.confirm('Are you sure, you want to Delete this order');
+        if (proceed) {
+            fetch(`http://localhost:5000/orders/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('genius-token')}`
+                }
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.deletedCount > 0) {
+                        alert('deleted successfully');
+                        const remaining = orders.filter(odr => odr._id !== id);
+                        setsOrders(remaining);
+                    }
+                })
+        }
+    }
+
     return (
         <div>
             <h3 className="text-3xl mb-5">All Orders</h3>
@@ -61,6 +81,7 @@ const AllOrder = () => {
                             <th>Seller Email</th>
                             <th>Payment</th>
                             <th>Status</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -88,6 +109,9 @@ const AllOrder = () => {
                                     <button
                                         onClick={() => handleStatusUpdate(order._id)}
                                         className="btn btn-ghost btn-xs">{order.status ? order.status : 'pending'}</button>
+                                </td>
+                                <td>
+                                    <label onClick={() => handleDelete(order._id)} htmlFor="confirmation-modal" className="btn btn-sm btn-error">Delete</label>
                                 </td>
                             </tr>)
                         }
