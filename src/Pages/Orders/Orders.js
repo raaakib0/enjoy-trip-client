@@ -1,6 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
+import Payment from '../Payment/Payment';
+// import Payment from '../Payment/Payment';
 import OrderRow from './OrderRow';
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PK);
+// console.log(stripePromise)
 
 const Orders = () => {
     const { user, logOut } = useContext(AuthContext);
@@ -26,25 +34,29 @@ const Orders = () => {
 
     // orders.map(order => { total = order.price * order.day })
     // if (total != NaN) {
-    let sum = 0;
+
+
     let total = 0;
-      
-    const summary = (price,day) => {
+    const summary = (price, day) => {
+
         total += price * day;
         // sum += total;
         // console.log(total, sum)
+        return total;
     }
-        orders.map(order => {
-            summary(order.price, order.days);
-            // sum = sum + total;
-            // console.log(total, sum)
-        })
-        
+    const sssum = orders.map(order => {
+        const ssum = summary(order.price, order.days);
+        // sum = sum + total;
+        // console.log( ssum)
+        return ssum;
+    })
+
+    // let sum = summary;
     // }
-   
-    
-    // console.log(total,sum)
-    
+
+    const totalOrderValue = sssum[sssum.length - 1];
+    console.log(totalOrderValue)
+
     const handleDelete = id => {
         const proceed = window.confirm('Are you sure, you want to cancel this order');
         if (proceed) {
@@ -87,7 +99,7 @@ const Orders = () => {
     //             }
     //         })
     // }
-
+    // console.log(user)
     return (
         <div>
             <h2 className="text-5xl">You have {orders.length} Orders</h2>
@@ -100,7 +112,7 @@ const Orders = () => {
                             <th>Name</th>
                             <th>Price</th>
                             {/* <th>Favorite Color</th> */}
-                            <th></th>
+                            <th>Payment</th>
                             <th>Status</th>
                         </tr>
                     </thead>
@@ -110,7 +122,7 @@ const Orders = () => {
                                 key={order._id}
                                 order={order}
                                 handleDelete={handleDelete}
-                                // handleStatusUpdate={handleStatusUpdate}
+                            // handleStatusUpdate={handleStatusUpdate}
                             ></OrderRow>)
                         }
                     </tbody>
@@ -119,25 +131,67 @@ const Orders = () => {
                             <th>
                             </th>
                             <th></th>
-                            <th className='text-xl font-bold' >Total Price = {total}</th>
+                            <th className='text-xl font-bold' >Total Price Tk = {total}</th>
                             <th></th>
-                            <th><button className="btn btn-primary">Make Payment</button>
+                            <th>
+                                {/* <Link
+                                    to={`/payment/${user?.email}`}>
+                                    <button className="btn btn-primary">Make Payment</button>
+                                </Link> */}
                                 {/* {
-                                    order.price && !order.paid && <Link
-                                    // to={`/dashboard/payment/${booking._id}`}
-                                    >
-                                        <button
-                                            className='btn btn-primary btn-sm'
-                                        >Pay</button>
-                                    </Link>
-                                }
-                                {
-                                    order.price && order.paid && <span className='text-green-500'>Paid</span>
+                                    orders.map(order => {
+                                        {
+                                            order.price && !order.paid &&
+                                            <Link
+                                                to={`/payment/${user?.email}`}>
+                                                <button
+                                                    className='btn btn-primary btn-sm'
+                                                >Pay</button>
+                                            </Link>
+
+                                        }
+                                        {
+                                            order.price && order.paid && <span className='text-green-500'>Paid</span>
+                                        }
+                                    })
                                 } */}
                             </th>
                         </tr>
+
                     </tfoot>
                 </table>
+                {/* <Payment></Payment> */}
+            </div>
+            <div className='flex justify-center'>
+                <div>
+                    <h3 className=" text-primary text-3xl">Payment </h3>
+                    <p className="text-xl">Please pay <strong>Tk = {total}</strong>  </p>
+                    <div className='w-96 my-12 '>
+
+                        {
+                            // orders.map(order => <Elements stripe={stripePromise}>
+                            //     <Payment
+                            //         order={order}
+                            //         total={total}
+                            //         uEmail={user?.email}
+
+                            //     />
+                            // </Elements>)
+                            <Elements stripe={stripePromise}>
+                                <Payment
+                                    total={totalOrderValue}
+                                    uEmail={user?.email}
+                                />
+                            </Elements>
+                        }
+                        {/* orders.map(order => <OrderRow
+                        key={order._id}
+                        order={order}
+                        handleDelete={handleDelete}
+                    // handleStatusUpdate={handleStatusUpdate}
+                    ></OrderRow>) */}
+                    </div>
+                </div>
             </div>
         </div>
     );

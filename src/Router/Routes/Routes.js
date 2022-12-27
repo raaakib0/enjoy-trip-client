@@ -13,6 +13,7 @@ import CatVehicles from "../../Pages/Home/Vehicles/CatVehicles";
 import VehicleDetails from "../../Pages/Home/Vehicles/VehicleDetails";
 import Login from "../../Pages/Login/Login";
 import Orders from "../../Pages/Orders/Orders";
+import Payment from "../../Pages/Payment/Payment";
 import SignUp from "../../Pages/SignUp/SignUp";
 import AdminRoute from "../AdminRoute/AdminRoute";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
@@ -64,6 +65,11 @@ const router = createBrowserRouter([
         path: '/orders',
         element: <PrivateRoute><Orders></Orders></PrivateRoute>
       },
+      // {
+      //   path: '/payment/:id',
+      //   element: <Payment></Payment>,
+      //   loader: ({ params }) => fetch(`http://localhost:5000/orders?email=${params.email}`)
+      // },
       {
         path: '/dashboard',
         // element: <AdminRoute> <DashboardLayout></DashboardLayout></AdminRoute>,

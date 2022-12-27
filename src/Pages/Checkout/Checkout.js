@@ -23,9 +23,9 @@ import { useState } from 'react';
 //     );
 // }
 const Checkout = () => {
-    
+
     const [selectedDate, setSelectedDate] = useState(new Date());
-    const { _id, name, price,email,img } = useLoaderData();
+    const { _id, name, price, email, img } = useLoaderData();
     const { user } = useContext(AuthContext);
     const sellerEmail = email;
     // console.log(price)
@@ -52,7 +52,7 @@ const Checkout = () => {
             phone,
             address,
             message,
-            img:img
+            img: img
         }
 
         // if(phone.length > 10){
@@ -73,10 +73,10 @@ const Checkout = () => {
             .then(res => res.json())
             .then(data => {
                 console.log(data)
-                if(data.acknowledged){
+                if (data.acknowledged) {
                     alert('Order placed successfully')
                     form.reset();
-                    
+
                 }
             })
             .catch(er => console.error(er));
@@ -86,18 +86,28 @@ const Checkout = () => {
     return (
         <div>
             <form onSubmit={handlePlaceOrder}>
-                <h2 className="text-4xl">You are about to order: {name}</h2>
-                <h4 className="text-3xl">Price: {price}</h4>
-                <DayPicker
+                <div className="mb-7">
+
+                    {
+                        img &&
+                        <img className='w-50' src={img} alt="Avatar Tailwind CSS Component" />}
+
+                    <h2 className="text-4xl">You are about to order: {name}</h2>
+                    <h4 className="text-3xl">Price: {price}</h4>
+                    {/* <DayPicker
                     mode="single"
                     selected={selectedDate}
                     onSelect={setSelectedDate}
-                />
-                <p>you have selected{format(selectedDate, 'PP')}</p>
+                /> */}
+                    {/* <p>you have selected{format(selectedDate, 'PP')}</p> */}
+
+                </div>
+
+                <h3>Select Pick Date</h3>
                 <div className='grid grid-cols-1 lg:grid-cols-2 gap-4 mb-3'>
-                    <input name="startDate" type="text" placeholder="Start Date" defaultValue={format( selectedDate,'PP')} className="input input-ghost w-full  input-bordered" />
+                    <input name="startDate" type="date" placeholder="Start Date" className="input input-ghost w-full  input-bordered" />
                     <input name="days" type="number" placeholder="Days" className="input input-ghost w-full  input-bordered" />
-                    <input name="customerName" type="text" placeholder="Your Name"  className="input input-ghost w-full  input-bordered" />
+                    <input name="customerName" type="text" placeholder="Your Name" className="input input-ghost w-full  input-bordered" />
                     <input name="phone" type="text" placeholder="Your Phone" className="input input-ghost w-full  input-bordered" required />
                     <input name="email" type="text" placeholder="Your email" defaultValue={user?.email} className="input input-ghost w-full  input-bordered" readOnly />
                     <input name="address" type="text" placeholder="Your Address" className="input input-ghost w-full  input-bordered" />

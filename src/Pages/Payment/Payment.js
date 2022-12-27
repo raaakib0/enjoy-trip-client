@@ -1,30 +1,53 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import React, { useEffect, useState } from 'react';
 
-const CheckoutForm = ({ booking }) => {
+const Payment = ({ order, total2, uEmail }) => {
     const [cardError, setCardError] = useState('');
     const [success, setSuccess] = useState('');
     const [processing, setProcessing] = useState(false);
     const [transactionId, setTransactionId] = useState('');
     const [clientSecret, setClientSecret] = useState("");
-
+    // console.log(total2,uEmail)
     const stripe = useStripe();
     const elements = useElements();
-    const { price, email, patient, _id } = booking;
+    // const { vehicleName, price, email, _id } = order;
 
+    // const { user, logOut } = useContext(AuthContext);
+    // const [orders, setOrders] = useState([])
+
+    // useEffect(() => {
+    //     fetch(`http://localhost:5000/orders?email=${user?.email}`, {
+    //         headers: {
+    //             authorization: `Bearer ${localStorage.getItem('genius-token')}`
+    //         }
+    //     })
+    //         .then(res => {
+    //             if (res.status === 401 || res.status === 403) {
+    //                 return logOut();
+    //             }
+    //             return res.json();
+    //         })
+    //         .then(data => {
+    //             setOrders(data);
+    //         })
+    // }, [user?.email, logOut])
+
+    const total = 100;
     useEffect(() => {
         // Create PaymentIntent as soon as the page loads
-        fetch("https://doctors-portal-server-rust.vercel.app/create-payment-intent", {
+        fetch("http://localhost:5000/create-payment-intent", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 authorization: `bearer ${localStorage.getItem('accessToken')}`
             },
-            body: JSON.stringify({ price }),
+            body: JSON.stringify({ total }),
         })
             .then((res) => res.json())
             .then((data) => setClientSecret(data.clientSecret));
-    }, [price]);
+    }, [total]);
+    // console.log(total)
+    // console.log(clientSecret)
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -58,8 +81,9 @@ const CheckoutForm = ({ booking }) => {
                 payment_method: {
                     card: card,
                     billing_details: {
-                        name: patient,
-                        email: email
+                        // amount: total,
+                        name: uEmail,
+                        email: uEmail
                     },
                 },
             },
@@ -69,16 +93,17 @@ const CheckoutForm = ({ booking }) => {
             setCardError(confirmError.message);
             return;
         }
+        console.log(paymentIntent);
         if (paymentIntent.status === "succeeded") {
             console.log('card info', card);
             // store payment info in the database
             const payment = {
-                price,
+                amount: total,
                 transactionId: paymentIntent.id,
-                email,
-                bookingId: _id
+                email: uEmail,
+                // bookingId,
             }
-            fetch('https://doctors-portal-server-rust.vercel.app/payments', {
+            fetch('http://localhost:5000/payments', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json',
@@ -103,6 +128,7 @@ const CheckoutForm = ({ booking }) => {
     return (
         <>
             <form onSubmit={handleSubmit}>
+                {/* <form > */}
                 <CardElement
                     options={{
                         style: {
@@ -137,4 +163,4 @@ const CheckoutForm = ({ booking }) => {
     );
 };
 
-export default CheckoutForm;
+export default Payment;

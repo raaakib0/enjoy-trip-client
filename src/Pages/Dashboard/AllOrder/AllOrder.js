@@ -77,16 +77,11 @@ const AllOrder = () => {
                                 <td>
 
                                     {
-                                        order.price && !order.paid && <Link
-                                        // to={`/dashboard/payment/${booking._id}`}
-                                        >
-                                            <button
-                                                className='btn btn-error btn-sm'
-                                            >Not Paid</button>
-                                        </Link>
-                                    }
-                                    {
-                                        order.price && order.paid && <span className='text-green-500'>Paid</span>
+                                        !order.paid ?
+                                            <span className='text-primary text-l'>NOT PAID</span>
+                                            :
+                                            order.paid &&
+                                            <span className='text-green-500 text-l'>PAID</span>
                                     }
                                 </td>
                                 <td>

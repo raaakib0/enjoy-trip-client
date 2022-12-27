@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const OrderRow = ({ order, handleDelete, handleStatusUpdate }) => {
-    const { _id, vehicleName, phone, customer, price, vehicle,img,days, status } = order;
+    const { _id, vehicleName, phone, customer, price, vehicle, img, days, paid, status } = order;
     const [orderVehicle, setOrderVehicle] = useState({})
-// console.log(img)
+    // console.log(img)
     // console.log(orderVehicle)
     // useEffect(() => {
     //     fetch(`http://localhost:5000/vehicles2/${vehicle}`)
@@ -16,42 +16,50 @@ const OrderRow = ({ order, handleDelete, handleStatusUpdate }) => {
 
     return (
         <>
-        <tr>
-            <th>
-                <label>
-                    <button onClick={() => handleDelete(_id)} className='btn btn-error'>X</button>
-                </label>
-            </th>
-            <td>
-                <div className="flex items-center space-x-3">
-                    <div className="avatar">
-                        <div className="rounded w-24 h-24">
-                            {
-                                img && 
-                                <img src={img} alt="Avatar Tailwind CSS Component" />}
+            <tr>
+                <th>
+                    <label>
+                        <button onClick={() => handleDelete(_id)} className='btn btn-error'>X</button>
+                    </label>
+                </th>
+                <td>
+                    <div className="flex items-center space-x-3">
+                        <div className="avatar">
+                            <div className="rounded w-24 h-24">
+                                {
+                                    img &&
+                                    <img src={img} alt="Avatar Tailwind CSS Component" />}
+                            </div>
+                        </div>
+                        <div>
+                            <div className="font-bold">{customer}</div>
+                            <div className="text-sm opacity-50">{phone}</div>
                         </div>
                     </div>
-                    <div>
-                        <div className="font-bold">{customer}</div>
-                        <div className="text-sm opacity-50">{phone}</div>
-                    </div>
-                </div>
-            </td>
-            <td>
-                {vehicleName}
-                <br />
-                <h2 className="badge badge-ghost font-bold">{ price} X { days} = {price * days}</h2>
-            </td>
-            {/* <td>Purple</td> */}
-            <td></td>
-            <th>
-                <h2 
-                // onClick={() => handleStatusUpdate(_id)}
+                </td>
+                <td>
+                    {vehicleName}
+                    <br />
+                    <h2 className="badge badge-ghost font-bold">{price} X {days} = {price * days}</h2>
+                </td>
+                {/* <td>Purple</td> */}
+                <td>
+                    {
+                        !paid ?
+                            <span className='text-primary text-l'>NOT PAID</span>
+                            :
+                            paid &&
+                            <span className='text-green-500 text-l'>PAID</span>
+                    }
+                </td>
+                <th>
+                    <h2
+                        // onClick={() => handleStatusUpdate(_id)}
                         className="">{status ? status : 'pending'}</h2>
-                   
-            </th>
-        </tr>
-         {/* <tr>total price</tr>
+
+                </th>
+            </tr>
+            {/* <tr>total price</tr>
             <th>total rate</th>
             <td>total amount</td> */}
         </>
