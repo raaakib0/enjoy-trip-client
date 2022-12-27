@@ -8,7 +8,7 @@ const AllOrder = () => {
     const { user } = useContext(AuthContext);
     const [sorders, setsOrders] = useState([])
 
-    const url = `http://localhost:5000/orders3`;
+    const url = `https://enjoy-trip-server-raaakib0.vercel.app/orders3`;
 
     const { data: orders = [] } = useQuery({
         queryKey: ['orders', user?.email],
@@ -24,7 +24,7 @@ const AllOrder = () => {
     })
 
     const handleStatusUpdate = id => {
-        fetch(`http://localhost:5000/orders/${id}`, {
+        fetch(`https://enjoy-trip-server-raaakib0.vercel.app/orders/${id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json',
@@ -49,7 +49,7 @@ const AllOrder = () => {
     const handleDelete = id => {
         const proceed = window.confirm('Are you sure, you want to Delete this order');
         if (proceed) {
-            fetch(`http://localhost:5000/orders/${id}`, {
+            fetch(`https://enjoy-trip-server-raaakib0.vercel.app/orders/${id}`, {
                 method: 'DELETE',
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('genius-token')}`

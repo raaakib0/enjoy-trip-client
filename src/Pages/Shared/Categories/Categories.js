@@ -7,7 +7,7 @@ import { useState } from 'react';
 const Categories = () => {
     const [categories, setCategories] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/categories2')
+        fetch('https://enjoy-trip-server-raaakib0.vercel.app/categories2')
             .then(res => res.json())
             .then(data => setCategories(data));
     }, [])

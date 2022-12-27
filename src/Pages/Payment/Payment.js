@@ -16,7 +16,7 @@ const Payment = ({ order, total2, uEmail }) => {
     // const [orders, setOrders] = useState([])
 
     // useEffect(() => {
-    //     fetch(`http://localhost:5000/orders?email=${user?.email}`, {
+    //     fetch(`https://enjoy-trip-server-raaakib0.vercel.app/orders?email=${user?.email}`, {
     //         headers: {
     //             authorization: `Bearer ${localStorage.getItem('genius-token')}`
     //         }
@@ -35,7 +35,7 @@ const Payment = ({ order, total2, uEmail }) => {
     const total = 100;
     useEffect(() => {
         // Create PaymentIntent as soon as the page loads
-        fetch("http://localhost:5000/create-payment-intent", {
+        fetch("https://enjoy-trip-server-raaakib0.vercel.app/create-payment-intent", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -103,7 +103,7 @@ const Payment = ({ order, total2, uEmail }) => {
                 email: uEmail,
                 // bookingId,
             }
-            fetch('http://localhost:5000/payments', {
+            fetch('https://enjoy-trip-server-raaakib0.vercel.app/payments', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json',

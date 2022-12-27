@@ -62,7 +62,7 @@ const Checkout = () => {
 
         // }
 
-        fetch('http://localhost:5000/orders', {
+        fetch('https://enjoy-trip-server-raaakib0.vercel.app/orders', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',

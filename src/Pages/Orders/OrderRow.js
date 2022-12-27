@@ -7,7 +7,7 @@ const OrderRow = ({ order, handleDelete, handleStatusUpdate }) => {
     // console.log(img)
     // console.log(orderVehicle)
     // useEffect(() => {
-    //     fetch(`http://localhost:5000/vehicles2/${vehicle}`)
+    //     fetch(`https://enjoy-trip-server-raaakib0.vercel.app/vehicles2/${vehicle}`)
     //         .then(res => res.json())
     //         .then(data => setOrderVehicle(data));
     // }, [vehicle])

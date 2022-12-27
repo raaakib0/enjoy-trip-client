@@ -18,7 +18,7 @@ const ManageVehicle = () => {
     // const [orders, setOrders] = useState([])
 
     // useEffect(() => {
-    //     fetch(`http://localhost:5000/orders?email=${user?.email}`, {
+    //     fetch(`https://enjoy-trip-server-raaakib0.vercel.app/orders?email=${user?.email}`, {
     //         headers: {
     //             authorization: `Bearer ${localStorage.getItem('genius-token')}`
     //         }
@@ -39,7 +39,7 @@ const ManageVehicle = () => {
         queryKey: ['vehicles'],
         queryFn: async () => {
             try {
-                const res = await fetch(`http://localhost:5000/vehicles?email=${user?.email}`, {
+                const res = await fetch(`https://enjoy-trip-server-raaakib0.vercel.app/vehicles?email=${user?.email}`, {
                     headers: {
                         authorization: `bearer ${localStorage.getItem('accessToken')}`
                     }
@@ -55,7 +55,7 @@ const ManageVehicle = () => {
 
     
     const handleDeleteVehicle = vehicle => {
-        fetch(`http://localhost:5000/vehicles/${vehicle._id}`, {
+        fetch(`https://enjoy-trip-server-raaakib0.vercel.app/vehicles/${vehicle._id}`, {
             method: 'DELETE', 
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`

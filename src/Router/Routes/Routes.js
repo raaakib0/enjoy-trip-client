@@ -49,17 +49,17 @@ const router = createBrowserRouter([
       {
         path: '/vehicleDetails/:id',
         element: <VehicleDetails></VehicleDetails>,
-        loader: ({ params }) => fetch(`http://localhost:5000/vehicles/${params.id}`)
+        loader: ({ params }) => fetch(`https://enjoy-trip-server-raaakib0.vercel.app/vehicles/${params.id}`)
       },
       {
         path: '/checkout/:id',
         element: <PrivateRoute><Checkout></Checkout></PrivateRoute>,
-        loader: ({ params }) => fetch(`http://localhost:5000/vehicles/${params.id}`)
+        loader: ({ params }) => fetch(`https://enjoy-trip-server-raaakib0.vercel.app/vehicles/${params.id}`)
       },
       {
         path: '/categorie/:categorie',
         element: <CatVehicles></CatVehicles>,
-        loader: ({ params }) => fetch(`http://localhost:5000/vehicles3?categorie=${params.categorie}`)
+        loader: ({ params }) => fetch(`https://enjoy-trip-server-raaakib0.vercel.app/vehicles3?categorie=${params.categorie}`)
       },
       {
         path: '/orders',
@@ -68,7 +68,7 @@ const router = createBrowserRouter([
       // {
       //   path: '/payment/:id',
       //   element: <Payment></Payment>,
-      //   loader: ({ params }) => fetch(`http://localhost:5000/orders?email=${params.email}`)
+      //   loader: ({ params }) => fetch(`https://enjoy-trip-server-raaakib0.vercel.app/orders?email=${params.email}`)
       // },
       {
         path: '/dashboard',

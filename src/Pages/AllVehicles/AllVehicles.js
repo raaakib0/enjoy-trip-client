@@ -18,7 +18,7 @@ const AllVehicles = () => {
         queryKey: ['vehicles'],
         queryFn: async () => {
             try {
-                const res = await fetch(`http://localhost:5000/vehicles2`, {
+                const res = await fetch(`https://enjoy-trip-server-raaakib0.vercel.app/vehicles2`, {
                     headers: {
                         authorization: `bearer ${localStorage.getItem('accessToken')}`
                     }
@@ -34,7 +34,7 @@ const AllVehicles = () => {
 
 
     const handleDeleteVehicle = vehicle => {
-        fetch(`http://localhost:5000/vehicles/${vehicle._id}`, {
+        fetch(`https://enjoy-trip-server-raaakib0.vercel.app/vehicles/${vehicle._id}`, {
             method: 'DELETE',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`

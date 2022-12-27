@@ -17,7 +17,7 @@ const AddVehicle = () => {
     const { data: categories, isLoading } = useQuery({
         queryKey: ['categories'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/categories');
+            const res = await fetch('https://enjoy-trip-server-raaakib0.vercel.app/categories');
             const data = await res.json();
             return data;
         }
@@ -46,7 +46,7 @@ const AddVehicle = () => {
                 }
 
                 // save doctor information to the database
-                fetch('http://localhost:5000/vehicles', {
+                fetch('https://enjoy-trip-server-raaakib0.vercel.app/vehicles', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json', 

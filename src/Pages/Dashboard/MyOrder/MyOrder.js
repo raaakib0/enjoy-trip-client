@@ -9,7 +9,7 @@ const MyOrder = () => {
     const [sorders, setsOrders] = useState([])
 
 
-    const url = `http://localhost:5000/orders2?sellerEmail=${user?.email}`;
+    const url = `https://enjoy-trip-server-raaakib0.vercel.app/orders2?sellerEmail=${user?.email}`;
 
     const { data: orders = [] } = useQuery({
         queryKey: ['orders', user?.email],
@@ -25,7 +25,7 @@ const MyOrder = () => {
     })
 
     const handleStatusUpdate = id => {
-        fetch(`http://localhost:5000/orders/${id}`, {
+        fetch(`https://enjoy-trip-server-raaakib0.vercel.app/orders/${id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json',

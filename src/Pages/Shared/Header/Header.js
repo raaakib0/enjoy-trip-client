@@ -20,7 +20,7 @@ const Header = () => {
     // const { data: users = [], refetch } = useQuery({
     //     queryKey: ['users'],
     //     queryFn: async () => {
-    //         const res = await fetch('http://localhost:5000/users');
+    //         const res = await fetch('https://enjoy-trip-server-raaakib0.vercel.app/users');
     //         const data = await res.json();
     //         return data;
     //     }
@@ -31,7 +31,7 @@ const Header = () => {
     // const handleMakeSeller = id => {
     //     console.log(id)
       
-    //     fetch(`http://localhost:5000/users/${id}`, {
+    //     fetch(`https://enjoy-trip-server-raaakib0.vercel.app/users/${id}`, {
     //         method: 'PUT',
     //         headers: {
     //             authorization: `bearer ${localStorage.getItem('accessToken')}`
