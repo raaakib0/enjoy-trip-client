@@ -38,6 +38,21 @@ const AllUsers = () => {
         }
       })
   }
+  const handleRemoveSeller = id => {
+    fetch(`https://enjoy-trip-server-raaakib0.vercel.app/users/removeSeller/${id}`, {
+      method: 'PUT',
+      headers: {
+        authorization: `bearer ${localStorage.getItem('accessToken')}`
+      }
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.modifiedCount > 0) {
+          toast.success('Remove seller successful.')
+          refetch();
+        }
+      })
+  }
   const handleMakeAdmin = id => {
     fetch(`https://enjoy-trip-server-raaakib0.vercel.app/users/admin/${id}`, {
       method: 'PUT',
@@ -49,6 +64,21 @@ const AllUsers = () => {
       .then(data => {
         if (data.modifiedCount > 0) {
           toast.success('Make admin successful.')
+          refetch();
+        }
+      })
+  }
+  const handleRemoveAdmin = id => {
+    fetch(`https://enjoy-trip-server-raaakib0.vercel.app/users/removeAdmin/${id}`, {
+      method: 'PUT',
+      headers: {
+        authorization: `bearer ${localStorage.getItem('accessToken')}`
+      }
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.modifiedCount > 0) {
+          toast.success('Remove admin successful.')
           refetch();
         }
       })
@@ -92,8 +122,14 @@ const AllUsers = () => {
                 <th>{i + 1}</th>
                 <td>{user.name}</td>
                 <td>{user.email}</td>
-                <td>{user?.role2 == true && <button onClick={() => handleMakeSeller(user._id)} className='btn btn-xs btn-primary'>Make Seller</button>}</td>
-                <td>{user?.role !== 'admin' && <button onClick={() => handleMakeAdmin(user._id)} className='btn btn-xs btn-primary'>Make Admin</button>}</td>
+                <td>
+                  {user?.role2 == true && <button onClick={() => handleMakeSeller(user._id)} className='btn btn-xs btn-primary mr-1'>Make Seller</button>}
+                  {user?.role2 == "seller" && <button onClick={() => handleRemoveSeller(user._id)} className='btn btn-xs btn-error'>Remove Seller</button>}
+                </td>
+                <td>
+                  {user?.role !== 'admin' && <button onClick={() => handleMakeAdmin(user._id)} className='btn btn-xs btn-primary'>Make Admin</button>}
+                  {user?.role == 'admin' && <button onClick={() => handleRemoveAdmin(user._id)} className='btn btn-xs btn-error'>Remove Admin</button>}
+                </td>
                 {/* <td><button className='btn btn-xs btn-primary'>Make Admin</button></td> */}
                 {/* <td><button className='btn btn-xs btn-danger'>Delete</button></td> */}
                 <td>

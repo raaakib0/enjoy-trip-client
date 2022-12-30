@@ -8,14 +8,14 @@ import Loading from '../../Shared/Loading/Loading';
 
 const UpdateVehicle = () => {
     const { _id, name, price, email, description, img } = useLoaderData();
-// console.log(name)
+    // console.log(name)
     const { register, handleSubmit, formState: { errors } } = useForm();
     // const { user } = useContext(AuthContext);
 
     // const imageHostKey = process.env.REACT_APP_imgbb_key;
-// console.log(imageHostKey)
+    // console.log(imageHostKey)
     const navigate = useNavigate();
-    
+
     const { data: categories, isLoading } = useQuery({
         queryKey: ['categories'],
         queryFn: async () => {
@@ -37,37 +37,37 @@ const UpdateVehicle = () => {
         // })
         // .then(res => res.json())
         // .then(imgData => {
-            // if(imgData.success){
-                // console.log(imgData.data.url);
-                const vehicle = {
-                    name: data.name, 
-                    // email: data.email,
-                    // categorie: data.categorie,
-                    description: data.description,
-                    price: data.price,
-                    // img: imgData.data.url
-                }
+        // if(imgData.success){
+        // console.log(imgData.data.url);
+        const vehicle = {
+            name: data.name,
+            // email: data.email,
+            // categorie: data.categorie,
+            description: data.description,
+            price: data.price,
+            // img: imgData.data.url
+        }
 
-                fetch(`http://localhost:5000/updateVehicle/${_id}`, {
-                    method: 'PUT',
-                    headers: {
-                        'content-type': 'application/json', 
-                        authorization: `bearer ${localStorage.getItem('accessToken')}`
-                    },
-                    body: JSON.stringify(vehicle)
-                })
-                .then(res => res.json())
-                .then(result =>{
-                    console.log(result);
-                    toast.success(`${data.name} is added successfully`);
-                    navigate('/dashboard/managevehicle')
-                })
-    //         }
-    // }
+        fetch(`https://enjoy-trip-server-raaakib0.vercel.app/updateVehicle/${_id}`, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json',
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
+            },
+            body: JSON.stringify(vehicle)
+        })
+            .then(res => res.json())
+            .then(result => {
+                console.log(result);
+                toast.success(`${data.name} is added successfully`);
+                navigate('/dashboard/managevehicle')
+            })
+        //         }
+        // }
         // )
     }
 
-    if(isLoading){
+    if (isLoading) {
         return <Loading></Loading>
     }
 
@@ -94,7 +94,7 @@ const UpdateVehicle = () => {
                     <label className="label"> <span className="label-text">Price / Day</span></label>
                     <input type="number" {...register("price", {
                         required: "price is Required"
-                    })} className="input input-bordered w-full max-w-xs" defaultValue={price}/>
+                    })} className="input input-bordered w-full max-w-xs" defaultValue={price} />
                     {errors.price && <p className='text-red-500'>{errors.price.message}</p>}
                 </div>
                 {/* <div className="form-control w-full max-w-xs">
@@ -115,9 +115,9 @@ const UpdateVehicle = () => {
                         <span className="label-text">Description</span>
                     </label>
                     {/* <textarea className="textarea textarea-bordered h-24" placeholder="Description"></textarea> */}
-                    <textarea  type="text" {...register("description", {
+                    <textarea type="text" {...register("description", {
                         required: "description is Required"
-                    })} className="input input-bordered w-full max-w-xs h-24" defaultValue={description}/>
+                    })} className="input input-bordered w-full max-w-xs h-24" defaultValue={description} />
                     {errors.description && <p className='text-red-500'>{errors.description.message}</p>}
                 </div>
                 {/* <div className="form-control w-full max-w-xs">
