@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 import ConfirmationModal from '../Shared/ConfirmationModal/ConfirmationModal';
 import Loading from '../Shared/Loading/Loading';
@@ -81,6 +82,9 @@ const AllVehicles = () => {
                                 <td>{vehicle.price}</td>
                                 <td>{vehicle.categorie}</td>
                                 <td>
+                                    <Link to={`/dashboard/updateVehicle/${vehicle._id}`}>
+                                        <button className="btn btn-sm btn-primary mr-1">Update</button>
+                                    </Link>
                                     <label onClick={() => setDeletingVehicle(vehicle)} htmlFor="confirmation-modal" className="btn btn-sm btn-error">Delete</label>
                                 </td>
                             </tr>)

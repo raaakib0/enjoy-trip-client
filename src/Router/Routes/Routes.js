@@ -8,6 +8,7 @@ import AllUsers from "../../Pages/Dashboard/AllUsers/AllUsers";
 import Dashboard from "../../Pages/Dashboard/Dashboard/Dashboard";
 import ManageVehicle from "../../Pages/Dashboard/ManageVehicle/ManageVehicle";
 import MyOrder from "../../Pages/Dashboard/MyOrder/MyOrder";
+import UpdateVehicle from "../../Pages/Dashboard/UpdateVehicle/UpdateVehicle";
 import Home from "../../Pages/Home/Home/Home";
 import CatVehicles from "../../Pages/Home/Vehicles/CatVehicles";
 import VehicleDetails from "../../Pages/Home/Vehicles/VehicleDetails";
@@ -102,6 +103,11 @@ const router = createBrowserRouter([
             // element:  <SellerRoute> <AddVehicle></AddVehicle></SellerRoute>,
             // element: <AdminRoute>  <AddVehicle></AddVehicle></AdminRoute>
             element:  <AddVehicle></AddVehicle>
+          },
+          {
+            path: '/dashboard/updateVehicle/:id',
+            element: <UpdateVehicle></UpdateVehicle>,
+            loader: ({ params }) => fetch(`https://enjoy-trip-server-raaakib0.vercel.app/vehicles/${params.id}`)
           },
           {
             path: '/dashboard/managevehicle',

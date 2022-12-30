@@ -16,7 +16,7 @@ const VehicleDetails = () => {
     return (
         // <div className="card card-compact w-96 bg-base-100 shadow-xl">
         <div className="card card-compact bg-base-100 shadow-xl mb-5">
-            <figure><img src={img} alt="Shoes" /></figure>
+            <figure><img src={img} alt="Vehicle" /></figure>
             <div className="card-body">
                 <h2 className="card-name text-2xl font-semibold">Car name: {name}</h2>
                 <p className='text-xl font-semibold'>Seller: {email}</p>
