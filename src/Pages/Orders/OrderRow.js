@@ -55,7 +55,7 @@ const OrderRow = ({ order, handleDelete, handleStatusUpdate }) => {
                 <th>
                     <h2
                         // onClick={() => handleStatusUpdate(_id)}
-                        className="">{status ? status : 'pending'}</h2>
+                        className="">{status ? status : 'Pending'}</h2>
 
                 </th>
             </tr>

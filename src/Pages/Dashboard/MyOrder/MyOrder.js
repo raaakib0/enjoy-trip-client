@@ -70,8 +70,8 @@ const MyOrder = () => {
                                 <th>{i + 1}</th>
                                 <td>{order.vehicleName}</td>
                                 <td> {order.price} X {order.days} = {order.price * order.days}</td>
-                                <td>{order.appointmentDate}</td>
-                                <td>{order.slot}</td>
+                                <td>{order.startDate}</td>
+                                <td>{order.days} Days</td>
                                 <td>
                                     {
                                         !order.paid ?

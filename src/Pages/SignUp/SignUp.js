@@ -32,8 +32,11 @@ const SignUp = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user.email);
+
                 navigate('/')
-                toast('User Created Successfully.')
+                toast.success('User Created Successfully.')
+                // toast.success('Make seller successful.')
+
                 setAuthToken(user);
                 // console.log(name);
                 const userInfo = {
@@ -47,12 +50,16 @@ const SignUp = () => {
                 //         saveUser(name, email);
                 //     })
             })
-            .catch(err => console.error(err));
+            // .catch(err => console.error(err));
+            .catch(error => {
+                console.log(error)
+                setSignUPError(error.message)
+            });
     }
 
     const saveUser = (name, email, role2) => {
         const user = { name, email, role2 };
-        console.log( user);
+        console.log(user);
         fetch('https://enjoy-trip-server-raaakib0.vercel.app/users', {
             method: 'POST',
             headers: {
@@ -81,27 +88,32 @@ const SignUp = () => {
                                 <span className="label-text">Name</span>
                             </label>
                             <input type="text" name='name' placeholder="Your Name" className="input input-bordered" />
+                            {errors.name && <p className='text-red-500'>{errors.name.message}</p>}
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Email</span>
                             </label>
                             <input type="text" name='email' placeholder="email" className="input input-bordered" required />
+                            {errors.email && <p className='text-red-500'>{errors.email.message}</p>}
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Password</span>
                             </label>
                             <input type="password" name='password' placeholder="password" className="input input-bordered" required />
-
+                            {errors.password && <p className='text-red-500'>{errors.password.message}</p>}
                         </div>
                         <div className="form-control">
                             <label className="cursor-pointer label">
                                 <span className="label-text">Request for Seller</span>
                                 <input type="checkbox" name="checkbox" className="checkbox checkbox-info" />
                             </label>
+                            {signUpError && <p className='text-red-600'>{signUpError}</p>}
+
                         </div>
                         <div className="form-control mt-6">
+                            {/* {signUpError && <p className='text-red-600'>{signUpError}</p>} */}
                             <input className="btn btn-primary" type="submit" value="Sign Up" />
                         </div>
                     </form>
