@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const OrderRow = ({ order, handleDelete, handleStatusUpdate }) => {
-    const { _id, vehicleName, phone, customer, price, vehicle, img, days, paid, status } = order;
+    const { _id, vehicleName, phone, customer, price, cashOnDelivery, vehicle, startDate, img, days, paid, status } = order;
     const [orderVehicle, setOrderVehicle] = useState({})
     // console.log(img)
     // console.log(orderVehicle)
     // useEffect(() => {
-    //     fetch(`https://enjoy-trip-server-raaakib0.vercel.app/vehicles2/${vehicle}`)
+    //     fetch(`https://enjoy-trip-server.vercel.app/vehicles2/${vehicle}`)
     //         .then(res => res.json())
     //         .then(data => setOrderVehicle(data));
     // }, [vehicle])
@@ -40,9 +40,19 @@ const OrderRow = ({ order, handleDelete, handleStatusUpdate }) => {
                 <td>
                     {vehicleName}
                     <br />
-                    <h2 className="badge badge-ghost font-bold">{price} X {days} = {price * days}</h2>
+                    <h2 className=" font-bold">{price} X {days} = {price * days}</h2>
                 </td>
-                {/* <td>Purple</td> */}
+                <td>{startDate}</td>
+                <td>{days} Days</td>
+                <td>
+                    {
+                        cashOnDelivery === !true ?
+                            <span className='text-primary text-l'>Please pay your bill</span>
+                            :
+                            cashOnDelivery === true &&
+                            <span className='text-green-500 text-l'>Cash On Delivery</span>
+                    }
+                </td>
                 <td>
                     {
                         !paid ?

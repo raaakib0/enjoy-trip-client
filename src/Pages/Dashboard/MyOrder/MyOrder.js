@@ -9,7 +9,7 @@ const MyOrder = () => {
     const [sorders, setsOrders] = useState([])
 
 
-    const url = `https://enjoy-trip-server-raaakib0.vercel.app/orders2?sellerEmail=${user?.email}`;
+    const url = `https://enjoy-trip-server.vercel.app/orders2?sellerEmail=${user?.email}`;
 
     const { data: orders = [] } = useQuery({
         queryKey: ['orders', user?.email],
@@ -25,7 +25,7 @@ const MyOrder = () => {
     })
 
     const handleStatusUpdate = id => {
-        fetch(`https://enjoy-trip-server-raaakib0.vercel.app/orders/${id}`, {
+        fetch(`https://enjoy-trip-server.vercel.app/orders/${id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json',
@@ -55,10 +55,12 @@ const MyOrder = () => {
                     <thead>
                         <tr>
                             <th></th>
+                            <th></th>
                             <th>Name</th>
                             <th>Price</th>
                             <th>Date</th>
                             <th>Time</th>
+                            <th>Payment Method</th>
                             <th>Payment</th>
                             <th>Status</th>
                         </tr>
@@ -68,10 +70,26 @@ const MyOrder = () => {
                             orders &&
                             orders?.map((order, i) => <tr key={orders._id}>
                                 <th>{i + 1}</th>
+                                <div className="avatar">
+                                    <div className="rounded-full w-24 h-24">
+                                        {
+                                            order.img &&
+                                            <img src={order.img} alt="Avatar Tailwind CSS Component" />}
+                                    </div>
+                                </div>
                                 <td>{order.vehicleName}</td>
                                 <td> {order.price} X {order.days} = {order.price * order.days}</td>
                                 <td>{order.startDate}</td>
                                 <td>{order.days} Days</td>
+                                <td>
+                                    {
+                                        order.cashOnDelivery === !true ?
+                                            <span className='text-primary text-l'>Please Wait for Payment</span>
+                                            :
+                                            order.cashOnDelivery === true &&
+                                            <span className='text-green-500 text-l'>Cash On Delivery</span>
+                                    }
+                                </td>
                                 <td>
                                     {
                                         !order.paid ?

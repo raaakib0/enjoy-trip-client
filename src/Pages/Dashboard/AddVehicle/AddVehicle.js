@@ -17,7 +17,7 @@ const AddVehicle = () => {
     const { data: categories, isLoading } = useQuery({
         queryKey: ['categories'],
         queryFn: async () => {
-            const res = await fetch('https://enjoy-trip-server-raaakib0.vercel.app/categories');
+            const res = await fetch('https://enjoy-trip-server.vercel.app/categories');
             const data = await res.json();
             return data;
         }
@@ -45,7 +45,7 @@ const AddVehicle = () => {
                     img: imgData.data.url
                 }
 
-                fetch('https://enjoy-trip-server-raaakib0.vercel.app/vehicles', {
+                fetch('https://enjoy-trip-server.vercel.app/vehicles', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json', 

@@ -8,7 +8,7 @@ const VehicleDetails = () => {
     // const [vehicles, setVehicles] = useState([]);
 
     // useEffect(() => {
-    //     fetch(`https://enjoy-trip-server-raaakib0.vercel.app/vehicles?_id=${_id}`)
+    //     fetch(`https://enjoy-trip-server.vercel.app/vehicles?_id=${_id}`)
     //         .then(res => res.json())
     //         .then(data => setVehicles(data))
     // },);

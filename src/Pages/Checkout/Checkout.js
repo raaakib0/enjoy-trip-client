@@ -5,6 +5,7 @@ import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 import { format } from 'date-fns';
 import { DayPicker } from 'react-day-picker';
 import { useState } from 'react';
+import { toast } from 'react-hot-toast';
 
 // export default function Example() {
 //     const [selected, setSelected] = React.useState < Date > ();
@@ -39,6 +40,8 @@ const Checkout = () => {
         const phone = form.phone.value;
         const address = form.address.value;
         const message = form.message.value;
+        const cashOnDelivery = form.checkbox.checked;;
+        // console.log(cashOnDelivery)
 
         const order = {
             vehicle: _id,
@@ -52,7 +55,8 @@ const Checkout = () => {
             phone,
             address,
             message,
-            img: img
+            img: img,
+            cashOnDelivery,
         }
 
         // if(phone.length > 10){
@@ -62,7 +66,7 @@ const Checkout = () => {
 
         // }
 
-        fetch('https://enjoy-trip-server-raaakib0.vercel.app/orders', {
+        fetch('https://enjoy-trip-server.vercel.app/orders', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
@@ -72,9 +76,9 @@ const Checkout = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
+                // console.log(data)
                 if (data.acknowledged) {
-                    alert('Order placed successfully')
+                    toast.success('Order placed successfully')
                     form.reset();
 
                 }
@@ -110,9 +114,14 @@ const Checkout = () => {
                     <input name="customerName" type="text" placeholder="Your Name" className="input input-ghost w-full  input-bordered" />
                     <input name="phone" type="text" placeholder="Your Phone" className="input input-ghost w-full  input-bordered" required />
                     <input name="email" type="text" placeholder="Your email" defaultValue={user?.email} className="input input-ghost w-full  input-bordered" readOnly />
-                    <input name="address" type="text" placeholder="Your Address" className="input input-ghost w-full  input-bordered" />
+                    <input name="address" type="text" placeholder="Your Address" className="input input-ghost w-full  input-bordered" required />
                 </div>
-                <textarea name="message" className="textarea textarea-bordered h-24 w-full" placeholder="Your Message" required></textarea>
+                <textarea name="message" className="textarea textarea-bordered h-24 w-full" placeholder="Your Message"></textarea>
+                
+                <label className="cursor-pointer label bg-lime-200 mb-2 rounded-lg">
+                    <span className="label-text font-bold ">Cash On Delivery</span>
+                    <input type="checkbox" name="checkbox" className="checkbox checkbox-info " />
+                </label>
 
                 <input className='btn mb-5' type="submit" value="Place Your Order" />
             </form>

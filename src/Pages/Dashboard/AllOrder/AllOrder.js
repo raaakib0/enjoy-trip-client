@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
 import { useState } from 'react';
+import { toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 
@@ -8,7 +9,7 @@ const AllOrder = () => {
     const { user } = useContext(AuthContext);
     const [sorders, setsOrders] = useState([])
 
-    const url = `https://enjoy-trip-server-raaakib0.vercel.app/orders3`;
+    const url = `https://enjoy-trip-server.vercel.app/orders3`;
 
     const { data: orders = [] } = useQuery({
         queryKey: ['orders', user?.email],
@@ -24,7 +25,7 @@ const AllOrder = () => {
     })
 
     const handleStatusUpdate = id => {
-        fetch(`https://enjoy-trip-server-raaakib0.vercel.app/orders/${id}`, {
+        fetch(`https://enjoy-trip-server.vercel.app/orders/${id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json',
@@ -49,7 +50,7 @@ const AllOrder = () => {
     const handleDelete = id => {
         const proceed = window.confirm('Are you sure, you want to Delete this order');
         if (proceed) {
-            fetch(`https://enjoy-trip-server-raaakib0.vercel.app/orders/${id}`, {
+            fetch(`https://enjoy-trip-server.vercel.app/orders/${id}`, {
                 method: 'DELETE',
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('genius-token')}`
@@ -58,7 +59,7 @@ const AllOrder = () => {
                 .then(res => res.json())
                 .then(data => {
                     if (data.deletedCount > 0) {
-                        alert('deleted successfully');
+                        toast.success('deleted successfully');
                         const remaining = orders.filter(odr => odr._id !== id);
                         setsOrders(remaining);
                     }

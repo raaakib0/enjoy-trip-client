@@ -60,7 +60,7 @@ const SignUp = () => {
     const saveUser = (name, email, role2) => {
         const user = { name, email, role2 };
         console.log(user);
-        fetch('https://enjoy-trip-server-raaakib0.vercel.app/users', {
+        fetch('https://enjoy-trip-server.vercel.app/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

@@ -21,15 +21,15 @@ const Vehicles = () => {
     const searchRef = useRef();
 
     useEffect(() => {
-        // fetch(`https://enjoy-trip-server-raaakib0.vercel.app/vehicles?search=${search}&order=${isAsc ? 'asc' : 'desc'}`)
-        fetch(`https://enjoy-trip-server-raaakib0.vercel.app/vehicles2`)
+        // fetch(`https://enjoy-trip-server.vercel.app/vehicles?search=${search}&order=${isAsc ? 'asc' : 'desc'}`)
+        fetch(`https://enjoy-trip-server.vercel.app/vehicles2`)
             .then(res => res.json())
             .then(data => setVehicles(data))
     }, [isAsc, search]);
 
     // const categories = 
     //      async () => {
-    //         const res = await fetch('https://enjoy-trip-server-raaakib0.vercel.app/categories');
+    //         const res = await fetch('https://enjoy-trip-server.vercel.app/categories');
     //         const data = await res.json();
     //         return data;
     //      }

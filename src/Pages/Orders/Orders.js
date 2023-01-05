@@ -6,6 +6,7 @@ import Payment from '../Payment/Payment';
 import OrderRow from './OrderRow';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
+import { toast } from 'react-hot-toast';
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PK);
 // console.log(stripePromise)
@@ -15,7 +16,7 @@ const Orders = () => {
     const [orders, setOrders] = useState([])
 
     useEffect(() => {
-        fetch(`https://enjoy-trip-server-raaakib0.vercel.app/orders?email=${user?.email}`, {
+        fetch(`https://enjoy-trip-server.vercel.app/orders?email=${user?.email}`, {
             headers: {
                 authorization: `Bearer ${localStorage.getItem('genius-token')}`
             }
@@ -55,12 +56,12 @@ const Orders = () => {
     // }
 
     const totalOrderValue = sssum[sssum.length - 1];
-    console.log(totalOrderValue)
+    // console.log(totalOrderValue)
 
     const handleDelete = id => {
         const proceed = window.confirm('Are you sure, you want to cancel this order');
         if (proceed) {
-            fetch(`https://enjoy-trip-server-raaakib0.vercel.app/orders/${id}`, {
+            fetch(`https://enjoy-trip-server.vercel.app/orders/${id}`, {
                 method: 'DELETE',
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('genius-token')}`
@@ -69,7 +70,7 @@ const Orders = () => {
                 .then(res => res.json())
                 .then(data => {
                     if (data.deletedCount > 0) {
-                        alert('deleted successfully');
+                        toast.success('deleted successfully');
                         const remaining = orders.filter(odr => odr._id !== id);
                         setOrders(remaining);
                     }
@@ -78,7 +79,7 @@ const Orders = () => {
     }
 
     // const handleStatusUpdate = id => {
-    //     fetch(`https://enjoy-trip-server-raaakib0.vercel.app/orders/${id}`, {
+    //     fetch(`https://enjoy-trip-server.vercel.app/orders/${id}`, {
     //         method: 'PATCH',
     //         headers: {
     //             'content-type': 'application/json',
@@ -107,11 +108,12 @@ const Orders = () => {
                 <table className="table w-full">
                     <thead>
                         <tr>
-                            <th>
-                            </th>
+                            <th></th>
                             <th>Name</th>
                             <th>Price</th>
-                            {/* <th>Favorite Color</th> */}
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Payment Method</th>
                             <th>Payment</th>
                             <th>Status</th>
                         </tr>
