@@ -25,7 +25,7 @@ const Login = () => {
             .then(result => {
                 const user = result.user;
 
-                navigate('/');
+                navigate(from, { replace: true });
                 const currentUser = {
                     email: user.email
                 }
@@ -43,7 +43,7 @@ const Login = () => {
                 })
                     .then(res => res.json())
                     .then(data => {
-                        console.log(data);
+                        // console.log(data);
                         toast('User Created Successfully.');
                         // alert('User Created Successfully.');
                         localStorage.setItem('genius-token', data.token);
