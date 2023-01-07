@@ -112,7 +112,7 @@ const Checkout = () => {
                     <input name="startDate" type="date" placeholder="Start Date" className="input input-ghost w-full  input-bordered" />
                     <input name="days" type="number" placeholder="Days" className="input input-ghost w-full  input-bordered" />
                     <input name="customerName" type="text" placeholder="Your Name" className="input input-ghost w-full  input-bordered" />
-                    <input name="phone" type="text" placeholder="Your Phone" className="input input-ghost w-full  input-bordered" required />
+                    <input name="phone" type="number" placeholder="Your Phone" className="input input-ghost w-full  input-bordered" required />
                     <input name="email" type="text" placeholder="Your email" defaultValue={user?.email} className="input input-ghost w-full  input-bordered" readOnly />
                     <input name="address" type="text" placeholder="Your Address" className="input input-ghost w-full  input-bordered" required />
                 </div>

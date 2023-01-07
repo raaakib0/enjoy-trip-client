@@ -27,10 +27,10 @@ const Header = () => {
     // });
     // const s= users.map(suser => console.log(suser._id));
     // console.log(suser);
-   
+
     // const handleMakeSeller = id => {
     //     console.log(id)
-      
+
     //     fetch(`https://enjoy-trip-server.vercel.app/users/${id}`, {
     //         method: 'PUT',
     //         headers: {
@@ -67,15 +67,15 @@ const Header = () => {
                         <button onClick={handleLogOut} className='btn-ghost'>Sign Out</button>
                     </li>
 
-                   
+
                     {/* {
                         users.map((user) => (console.log(user)))
                     } */}
                     <li className='font-semibold'>
-                    {/* {users.map((user) => <span className='font-semibold' key={user._id} > */}
-                            {/* <td>{user?.role2 !== 'seller' && <button onClick={() => handleMakeSeller(user._id)} className='btn btn-xs btn-primary'>Make Admin</button>}</td> */}
-                            {/* {user?.role2 !== 'seller' && */}
-                            {/* {!isSeller &&
+                        {/* {users.map((user) => <span className='font-semibold' key={user._id} > */}
+                        {/* <td>{user?.role2 !== 'seller' && <button onClick={() => handleMakeSeller(user._id)} className='btn btn-xs btn-primary'>Make Admin</button>}</td> */}
+                        {/* {user?.role2 !== 'seller' && */}
+                        {/* {!isSeller &&
                                 // <button onClick={() => handleMakeSeller(user.email)} className='btn-ghost'>{"Create Seller"}</button>
                             // users.map(suser =>    
                             //     <button onClick={() => handleMakeSeller(suser._id)} className='btn-ghost'>Request for Seller</button>)
@@ -83,21 +83,21 @@ const Header = () => {
                             } */}
                         {/* </span> */}
                         {/* )} */}
-                    
+
                     </li>
                     {
                         isSeller && !isAdmin && <>
-                           
+
                             <li className='font-semibold'><Link to='/dashboard'>Seller Dashboard</Link></li>
                         </>
                     }
                     {
                         isAdmin &&
-                        
+
                         <li className='font-semibold'><Link to='/dashboard'>Admin Dashboard</Link></li>
 
-                    }                
-                 
+                    }
+
                 </>
                 :
                 <li className='font-semibold'><Link to='/login'>Login</Link></li>
@@ -127,7 +127,9 @@ const Header = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <button className="btn btn-outline btn-warning">{user?.email }</button>
+                {user &&
+                    <button className="btn btn-outline btn-warning">{user?.email}</button>
+                }
                 <label htmlFor="dashboard-drawer" tabIndex={2} className="btn btn-ghost lg:hidden">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                 </label>

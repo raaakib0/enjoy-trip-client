@@ -22,10 +22,10 @@ const Vehicles = () => {
 
     useEffect(() => {
         // fetch(`https://enjoy-trip-server.vercel.app/vehicles?search=${search}&order=${isAsc ? 'asc' : 'desc'}`)
-        fetch(`https://enjoy-trip-server.vercel.app/vehicles2`)
+        fetch(`http://localhost:5000/vehicles2?search=${search}`)
             .then(res => res.json())
             .then(data => setVehicles(data))
-    }, [isAsc, search]);
+    }, [search]);
 
     // const categories = 
     //      async () => {
@@ -33,10 +33,10 @@ const Vehicles = () => {
     //         const data = await res.json();
     //         return data;
     //      }
-
-    // const handleSearch = () => {
-    //     setSearch(searchRef.current.value);
-    // }
+// console.log(search)
+    const handleSearch = () => {
+        setSearch(searchRef.current.value);
+    }
   
 
     return (
@@ -45,9 +45,9 @@ const Vehicles = () => {
                 <p className="text-2xl font-bold text-orange-600">Enjoy Your Trip</p>
                 <h2 className="text-5xl font-semibold">Our Vehicles</h2>
                 <p>the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. </p>
-                <input className='input input-sm' ref={searchRef} type="text" />
-                {/* <button onClick={handleSearch}>Search</button> */}
-                <button>Search</button>
+                <input className='input input-sm input-bordered input-info mr-3 mt-5' ref={searchRef} type="text" />
+                <button className='font-bold ' onClick={handleSearch}>Search</button>
+                {/* <button>Search</button> */}
                 {/* <button className='btn btn-ghost' onClick={() => setIsAsc(!isAsc)}>{isAsc ? 'desc' : 'asc'}</button> */}
             </div>
             <Categories></Categories>
