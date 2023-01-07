@@ -31,7 +31,7 @@ const Login = () => {
                 }
                 toast.success('Login successful.')
 
-                console.log(currentUser);
+                // console.log(currentUser);
 
                 // get jwt token
                 fetch('https://enjoy-trip-server.vercel.app/jwt', {
@@ -55,7 +55,7 @@ const Login = () => {
             // setLoginError(error.message);
             //   );
             .catch(error => {
-                console.log(error.message)
+                // console.log(error.message)
                 setLoginError(error.message);
             });
       
