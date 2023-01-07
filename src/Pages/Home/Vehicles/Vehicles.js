@@ -22,7 +22,7 @@ const Vehicles = () => {
 
     useEffect(() => {
         // fetch(`https://enjoy-trip-server.vercel.app/vehicles?search=${search}&order=${isAsc ? 'asc' : 'desc'}`)
-        fetch(`http://localhost:5000/vehicles2?search=${search}`)
+        fetch(`https://enjoy-trip-server.vercel.app/vehicles2?search=${search}`)
             .then(res => res.json())
             .then(data => setVehicles(data))
     }, [search]);
