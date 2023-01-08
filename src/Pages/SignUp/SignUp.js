@@ -77,7 +77,7 @@ const SignUp = () => {
                 // setCreatedUserEmail(email);
             })
     }
-    // console.log(signUpError)
+    console.log(signUpError)
     return (
         <div className="hero w-full my-20">
             <div className="hero-content grid gap-20 md:grid-cols-2 flex-col lg:flex-row">
@@ -118,6 +118,7 @@ const SignUp = () => {
                             {signUpError && <p className='text-red-600'>{signUpError == "Firebase: Error (auth/invalid-email)." ? "Invalid Email" : ""}</p>}
                             {signUpError && <p className='text-red-600'>{signUpError == "Firebase: Error (auth/wrong-password)." ? "Wrong Password" : ""}</p>}
                             {signUpError && <p className='text-red-600'>{signUpError == "Firebase: Password should be at least 6 characters (auth/weak-password)." ? "Weak password enter at least 6 characters" : ""}</p>}
+                            {signUpError && <p className='text-red-600'>{signUpError == "Firebase: Error (auth/email-already-in-use)." ? "Email already in use" : ""}</p>}
                             {/* {signUpError && <p className='text-red-600'>{signUpError}</p>} */}
 
                         </div>
