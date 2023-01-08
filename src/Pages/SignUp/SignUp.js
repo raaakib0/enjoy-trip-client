@@ -77,7 +77,7 @@ const SignUp = () => {
                 // setCreatedUserEmail(email);
             })
     }
-    console.log(signUpError)
+    // console.log(signUpError)
     return (
         <div className="hero w-full my-20">
             <div className="hero-content grid gap-20 md:grid-cols-2 flex-col lg:flex-row">
