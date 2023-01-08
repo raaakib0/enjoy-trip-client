@@ -19,7 +19,7 @@ const AllVehicles = () => {
         queryKey: ['vehicles'],
         queryFn: async () => {
             try {
-                const res = await fetch(`https://enjoy-trip-server.vercel.app/vehicles2`, {
+                const res = await fetch(`https://enjoy-trip-server.vercel.app/vehicles4`, {
                     headers: {
                         authorization: `bearer ${localStorage.getItem('accessToken')}`
                     }

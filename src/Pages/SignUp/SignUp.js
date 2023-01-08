@@ -1,7 +1,7 @@
 import React from 'react';
 import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { setAuthToken } from '../../api/auth';
 import toast from 'react-hot-toast';
 import img from '../../assets/images/login/login.svg';
@@ -14,6 +14,10 @@ const SignUp = () => {
     const { createUser, updateUser } = useContext(AuthContext);
     const [signUpError, setSignUPError] = useState('');
     const [createdUserEmail, setCreatedUserEmail] = useState('')
+    const location = useLocation();
+
+    const from = location.state?.from?.pathname || '/';
+
     // const [token] = useToken(createdUserEmail);
     const navigate = useNavigate();
     // const sellerRequest = () => {
@@ -26,14 +30,14 @@ const SignUp = () => {
         const email = form.email.value;
         const password = form.password.value;
         const role2 = form.checkbox.checked;
-        console.log(role2);
+        // console.log(role2);
 
         createUser(email, password)
             .then(result => {
                 const user = result.user;
-                console.log(user.email);
+                // console.log(user.email);
 
-                navigate('/')
+                navigate(from, { replace: true })
                 toast.success('User Created Successfully.')
                 // toast.success('Make seller successful.')
 
@@ -59,7 +63,7 @@ const SignUp = () => {
 
     const saveUser = (name, email, role2) => {
         const user = { name, email, role2 };
-        console.log(user);
+        // console.log(user);
         fetch('https://enjoy-trip-server.vercel.app/users', {
             method: 'POST',
             headers: {
@@ -69,11 +73,11 @@ const SignUp = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+                // console.log(data);
                 // setCreatedUserEmail(email);
             })
     }
-
+    // console.log(signUpError)
     return (
         <div className="hero w-full my-20">
             <div className="hero-content grid gap-20 md:grid-cols-2 flex-col lg:flex-row">
@@ -109,7 +113,12 @@ const SignUp = () => {
                                 <span className="label-text">Request for Seller</span>
                                 <input type="checkbox" name="checkbox" className="checkbox checkbox-info" />
                             </label>
-                            {signUpError && <p className='text-red-600'>{signUpError}</p>}
+                            
+                            {signUpError && <p className='text-red-600'>{signUpError == "Firebase: Error (auth/user-not-found)." ? "User Not Found" : ""}</p>}
+                            {signUpError && <p className='text-red-600'>{signUpError == "Firebase: Error (auth/invalid-email)." ? "Invalid Email" : ""}</p>}
+                            {signUpError && <p className='text-red-600'>{signUpError == "Firebase: Error (auth/wrong-password)." ? "Wrong Password" : ""}</p>}
+                            {signUpError && <p className='text-red-600'>{signUpError == "Firebase: Password should be at least 6 characters (auth/weak-password)." ? "Weak password enter at least 6 characters" : ""}</p>}
+                            {/* {signUpError && <p className='text-red-600'>{signUpError}</p>} */}
 
                         </div>
                         <div className="form-control mt-6">

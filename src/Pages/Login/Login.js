@@ -6,7 +6,6 @@ import SocialLogin from '../Shared/SocialLogin/SocialLogin';
 import toast from 'react-hot-toast';
 import { useState } from 'react';
 
-
 const Login = () => {
     const [loginError, setLoginError] = useState('');
     const { login } = useContext(AuthContext);
@@ -61,6 +60,7 @@ const Login = () => {
       
     }
 
+    // console.log(loginError)
 return (
     <div className="hero w-full my-20">
         <div className="hero-content grid gap-20 md:grid-cols-2 flex-col lg:flex-row">
@@ -85,7 +85,10 @@ return (
                             <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                             
                         </label>
-                        {loginError && <p className='text-red-600'>{loginError}</p>}
+                        {loginError && <p className='text-red-600'>{loginError == "Firebase: Error (auth/user-not-found)." ? "User Not Found":""}</p>}
+                        {loginError && <p className='text-red-600'>{loginError == "Firebase: Error (auth/invalid-email)." ? "Invalid Email":""}</p>}
+                        {loginError && <p className='text-red-600'>{loginError == "Firebase: Error (auth/wrong-password)." ? "Wrong Password":""}</p>}
+                        {/* {loginError && <p className='text-red-600'>{loginError}</p>} */}
 
                     </div>
                     <div className="form-control mt-6">

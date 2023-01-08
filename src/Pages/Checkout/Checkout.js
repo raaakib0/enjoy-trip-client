@@ -109,8 +109,8 @@ const Checkout = () => {
 
                 <h3>Select Pick Date</h3>
                 <div className='grid grid-cols-1 lg:grid-cols-2 gap-4 mb-3'>
-                    <input name="startDate" type="date" placeholder="Start Date" className="input input-ghost w-full  input-bordered" />
-                    <input name="days" type="number" placeholder="Days" className="input input-ghost w-full  input-bordered" />
+                    <input name="startDate" type="date" placeholder="Start Date" className="input input-ghost w-full  input-bordered" required />
+                    <input name="days" type="number" min="1" placeholder="Days" className="input input-ghost w-full  input-bordered" required />
                     <input name="customerName" type="text" placeholder="Your Name" className="input input-ghost w-full  input-bordered" />
                     <input name="phone" type="number" placeholder="Your Phone" className="input input-ghost w-full  input-bordered" required />
                     <input name="email" type="text" placeholder="Your email" defaultValue={user?.email} className="input input-ghost w-full  input-bordered" readOnly />
