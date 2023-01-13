@@ -24,12 +24,17 @@ import { toast } from 'react-hot-toast';
 //     );
 // }
 const Checkout = () => {
-
+    const [num, setNum] = useState('');
     const [selectedDate, setSelectedDate] = useState(new Date());
     const { _id, name, price, email, img } = useLoaderData();
     const { user } = useContext(AuthContext);
     const sellerEmail = email;
     // console.log(price)
+    const handleNumChange = event => {
+        const limit = 14;
+        setNum(event.target.value.slice(0, limit));
+    };
+
     const handlePlaceOrder = event => {
         event.preventDefault();
         const form = event.target;
@@ -112,7 +117,7 @@ const Checkout = () => {
                     <input name="startDate" type="date" placeholder="Start Date" className="input input-ghost w-full  input-bordered" required />
                     <input name="days" type="number" min="1" placeholder="Days" className="input input-ghost w-full  input-bordered" required />
                     <input name="customerName" type="text" placeholder="Your Name" className="input input-ghost w-full  input-bordered" />
-                    <input name="phone" type="number" placeholder="Your Phone" className="input input-ghost w-full  input-bordered" required />
+                    <input onChange={handleNumChange} value={num} name="phone" type="number" placeholder="Your Phone" className="input input-ghost w-full  input-bordered" required />
                     <input name="email" type="text" placeholder="Your email" defaultValue={user?.email} className="input input-ghost w-full  input-bordered" readOnly />
                     <input name="address" type="text" placeholder="Your Address" className="input input-ghost w-full  input-bordered" required />
                 </div>
